@@ -7,20 +7,24 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Calidad y Punto</title>
-        <h:form>  
-            <p:growl id="messages"/>
-            <p:menubar>
-                <p:menuitem value="Inicio" url="home.xhtml?faces-redirect=true" icon="ui-icon-document" />
-                <p:menuitem value="Reportes" url="reportes.xhtml?faces-redirect=true" icon="ui-icon-newwin" />
-                <p:menuitem value="Administrar Usuarios" url="http://www.primefaces.org" icon="ui-icon-contact" />
-                <f:facet name="options">
-                    <p:outputLabel value="bienvenid@: #{LoginBean.mostrarNombre(request)}" />
-                    <h:form id="logoutForm">
-                        <p:commandButton id="logoutBTN" value="Logout" icon="ui-icon-extlink" action="#{LoginBean.logout(request)}"/>
-                    </h:form>
-                </f:facet>
-            </p:menubar>
-        </h:form>
-
+        <div align="right" style="padding: 5px;background-color: #111111">
+            <h:form>  
+                <p:growl id="messages"/>
+                <p:menubar>
+                    <p:menuitem value="Inicio" url="home.xhtml?faces-redirect=true" icon="ui-icon-document" />
+                    <p:menuitem value="Reportes" url="reportes.xhtml?faces-redirect=true" icon="ui-icon-newwin" />
+                    <p:menuitem value="Administrar Usuarios" url="http://www.primefaces.org" icon="ui-icon-contact" />
+                    <f:facet name="options">
+                        <p:outputLabel value="bienvenid@: #{LoginBean.mostrarNombre(request)}" />
+                        <h:form id="logoutForm">
+                            <p:commandButton id="logoutBTN" value="Logout" icon="ui-icon-extlink" action="#{LoginBean.logout(request)}"/>
+                        </h:form>
+                    </f:facet>
+                </p:menubar>
+            </h:form>
+        </div>
     </h:head>
+    <h:body>
+        Jam
+    </h:body>
 </html>

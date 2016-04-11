@@ -2,13 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Calidad y Punto</title>
         <ui:composition template="header.xhtml" />
     </h:head>
-    <h:body>
-        Hello from Facelets
+    <h:body  style="background-color: #666666">
+        <h:form>
+            <p:commandButton value="Plan de Cuidado" action="paciente.xhmtl?faces-redirect=true" />
+            <p:commandButton value="Cambiar Contraseña" onclick="modifyDialogUser.show();" type="button"/>
+            <p:commandButton value="Mis Planes" action="misPlanes.xhtml?faces-redirect=true"/>
+        </h:form>        
     </h:body>
 </html>
 
