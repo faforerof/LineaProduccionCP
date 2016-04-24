@@ -59,7 +59,7 @@ public class LoginBean implements Serializable{
                 session.setAttribute("nombre", useras.getNombres());
                 session.setAttribute("apellido", useras.getApellidos());
                 session.setAttribute("id", useras.getIdusers());
-                session.setAttribute("administrator", useras.getRol());
+                session.setAttribute("administrator", useras.getRol()==0);
                 return "home.xhtml?faces-redirect=true";
             }
         }
@@ -109,11 +109,15 @@ public class LoginBean implements Serializable{
         return "login.xhtml?faces-redirect=true";
     }
     
+    public boolean isAdministrator(HttpServletRequest request){
+        HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        return (boolean) session.getAttribute("administrator");
+    }
     
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
-    }   
+    }
     
     public String getUserName() {
         return userName;

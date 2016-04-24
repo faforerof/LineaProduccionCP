@@ -7,13 +7,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Calidad y Punto</title>
-        <div align="right" style="padding: 5px;background-color: #111111">
+        <div align="right">
             <h:form>  
                 <p:growl id="messages"/>
                 <p:menubar>
-                    <p:menuitem value="Inicio" url="home.xhtml?faces-redirect=true" icon="ui-icon-document" />
-                    <p:menuitem value="Reportes" url="reportes.xhtml?faces-redirect=true" icon="ui-icon-newwin" />
-                    <p:menuitem value="Administrar Usuarios" url="http://www.primefaces.org" icon="ui-icon-contact" />
+                    <p:menuitem value="Inicio" url="home.xhtml?faces-redirect=true" icon="ui-icon-home" />
+                    <p:menuitem value="Reportes" url="reportes.xhtml?faces-redirect=true" icon="ui-icon-document" />
+                    <p:menuitem value="Cambio de Contraseña" onclick="PF('modifyDialogUser').show();" icon="ui-icon-refresh"/>
+                    <p:menuitem value="Administrar Usuarios" url="useradmin.xhtml?faces-redirect=true" icon="ui-icon-contact" rendered="#{LoginBean.isAdministrator(request)}"/>
                     <f:facet name="options">
                         <p:outputLabel value="bienvenid@: #{LoginBean.mostrarNombre(request)}" />
                         <h:form id="logoutForm">
@@ -22,9 +23,19 @@
                     </f:facet>
                 </p:menubar>
             </h:form>
+            <p:dialog id="modifyDlgUser" widgetVar="modifyDialogUser"
+                header="Cambiar Contraseña" modal="true" showEffect="explode" hideEffect="explode" >
+                <h:form id="buttonsChangePass">
+                    <h:panelGrid id="changePassData" columns="2">
+                        <h:outputText value="Contraseña" />
+                        <h:inputSecret value="#{UsersBean.newPassword}" required="true" />
+                        <h:outputText value="Nueva Contraseña" />
+                        <h:inputSecret value="#{UsersBean.newPassword2}" required="true" />
+                    </h:panelGrid>
+                    <p:commandButton value="Modificar" action="#{UsersBean.changePassword()}" ajax="false"/>
+                    <p:commandButton value="Cancelar" onclick="modifyDialogUser.hide();" />
+                </h:form>
+            </p:dialog>
         </div>
     </h:head>
-    <h:body>
-        Jam
-    </h:body>
 </html>

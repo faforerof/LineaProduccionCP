@@ -6,9 +6,9 @@
 package com.calidadypunto.session;
 
 import com.calidadypunto.modelo.Users;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -35,6 +35,12 @@ public class UsersFacade extends AbstractFacade<Users> {
         Query nq = getEntityManager().createNamedQuery("Users.findByUsername");
         nq.setParameter("username", userName);
         Users user = (Users)nq.getSingleResult();
+        return user;
+    }
+    
+    public List<Users> findAll(String userName){
+        Query nq = getEntityManager().createNamedQuery("Users.findAll");
+        List<Users> user = (List<Users>)nq.getResultList();
         return user;
     }
 }
