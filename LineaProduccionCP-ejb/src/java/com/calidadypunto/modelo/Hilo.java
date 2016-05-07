@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,8 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Hilo.findByIdhilo", query = "SELECT h FROM Hilo h WHERE h.idhilo = :idhilo"),
     @NamedQuery(name = "Hilo.findByFactura", query = "SELECT h FROM Hilo h WHERE h.factura = :factura"),
     @NamedQuery(name = "Hilo.findByPeso", query = "SELECT h FROM Hilo h WHERE h.peso = :peso"),
-    @NamedQuery(name = "Hilo.findByValorTotal", query = "SELECT h FROM Hilo h WHERE h.valorTotal = :valorTotal"),
-    @NamedQuery(name = "Hilo.findByDistribuidor", query = "SELECT h FROM Hilo h WHERE h.distribuidor = :distribuidor")})
+    @NamedQuery(name = "Hilo.findByPesoUsado", query = "SELECT h FROM Hilo h WHERE h.pesoUsado = :pesoUsado"),
+    @NamedQuery(name = "Hilo.findByValorTotal", query = "SELECT h FROM Hilo h WHERE h.valorTotal = :valorTotal")})
 public class Hilo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,17 +50,25 @@ public class Hilo implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "factura")
     private String factura;
-    @Size(max = 45)
-    @Column(name = "peso")
-    private String peso;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "peso")
+    private BigDecimal peso;
+    @Column(name = "peso_usado")
+    private BigDecimal pesoUsado;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "valor_total")
     private BigDecimal valorTotal;
-    @Size(max = 200)
-    @Column(name = "Distribuidor")
-    private String distribuidor;
-    @JoinColumn(name = "Referencia", referencedColumnName = "idreferencia")
-    @ManyToOne
+    @Lob
+    @Column(name = "Documento")
+    private byte[] documento;
+    @JoinColumn(name = "distribuidor", referencedColumnName = "idproveedor")
+    @ManyToOne(optional = false)
+    private Proveedor distribuidor;
+    @JoinColumn(name = "referencia", referencedColumnName = "idreferencia")
+    @ManyToOne(optional = false)
     private Referencia referencia;
 
     public Hilo() {
@@ -69,9 +78,11 @@ public class Hilo implements Serializable {
         this.idhilo = idhilo;
     }
 
-    public Hilo(Integer idhilo, String factura) {
+    public Hilo(Integer idhilo, String factura, BigDecimal peso, BigDecimal valorTotal) {
         this.idhilo = idhilo;
         this.factura = factura;
+        this.peso = peso;
+        this.valorTotal = valorTotal;
     }
 
     public Integer getIdhilo() {
@@ -90,12 +101,20 @@ public class Hilo implements Serializable {
         this.factura = factura;
     }
 
-    public String getPeso() {
+    public BigDecimal getPeso() {
         return peso;
     }
 
-    public void setPeso(String peso) {
+    public void setPeso(BigDecimal peso) {
         this.peso = peso;
+    }
+
+    public BigDecimal getPesoUsado() {
+        return pesoUsado;
+    }
+
+    public void setPesoUsado(BigDecimal pesoUsado) {
+        this.pesoUsado = pesoUsado;
     }
 
     public BigDecimal getValorTotal() {
@@ -106,11 +125,19 @@ public class Hilo implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public String getDistribuidor() {
+    public byte[] getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(byte[] documento) {
+        this.documento = documento;
+    }
+
+    public Proveedor getDistribuidor() {
         return distribuidor;
     }
 
-    public void setDistribuidor(String distribuidor) {
+    public void setDistribuidor(Proveedor distribuidor) {
         this.distribuidor = distribuidor;
     }
 

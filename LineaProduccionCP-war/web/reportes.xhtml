@@ -2,14 +2,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <ui:insert name="header" >
             <ui:include src="header.xhtml" />
         </ui:insert>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <p:layout fullPage="false">
+            <p:layoutUnit position="west" size="250" resizable="false" closable="false" >
+                <h:form>
+                    <p:panelMenu style="width:100%">
+                        <p:submenu label="Ajax Menuitems" expanded="true">
+                            <p:menuitem value="Save" actionListener="#{menuView.save}" icon="ui-icon-disk" />
+                            <p:menuitem value="Update" actionListener="#{menuView.update}"  icon="ui-icon-arrowrefresh-1-w" />
+                        </p:submenu>
+                        <p:submenu label="Non-Ajax Menuitem" expanded="true">
+                            <p:menuitem value="Delete" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
+                        </p:submenu>
+                        <p:separator />
+                        <p:submenu label="Navigations"  expanded="true">
+                            <p:submenu label="Links" icon="ui-icon-extlink">
+                                <p:submenu label="PrimeFaces" icon="ui-icon-heart">
+                                    <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon-home" />
+                                    <p:menuitem value="Docs" url="http://www.primefaces.org/documentation" icon="ui-icon-document" />
+                                    <p:menuitem value="Download" url="http://www.primefaces.org/downloads" icon="ui-icon-arrowthick-1-s" />
+                                    <p:menuitem value="Support" url="http://www.primefaces.org/support" icon="ui-icon-wrench" />
+                                </p:submenu>
+                            </p:submenu>
+                        </p:submenu>
+                    </p:panelMenu>
+                </h:form>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="center">
+                <p:chart type="line" model="#{ReportsBean.lineModel1}" style="width:100%;height:300px" widgetVar="chart" responsive="true"/>
+            </p:layoutUnit>
+
+        </p:layout>
+        
     </h:body>
 </html>
-

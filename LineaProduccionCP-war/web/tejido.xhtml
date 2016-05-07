@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <p:dataTable id="userasTable" var="users" value="#{UsersBean.usersList}" paginator="true" rows="50"
+                     selection="#{UsersBean.selectedUser}" selectionMode="single" rowKey="#{users.username}" >
+
+            <p:ajax event="rowSelect" listener="#{UsersBean.onRowSelect}"/>
+
+            <f:facet id="titulo" name="header">
+                Tejido - Teñido
+            </f:facet>
+            <p:column selectionMode="single" style="width:16px;text-align:center"/>
+            <p:column headerText="Número Factura">
+                #{users.nombres}
+            </p:column>
+            <p:column headerText="Lote">
+                #{users.nombres}
+            </p:column>
+            <p:column headerText="Programa">
+                #{users.apellidos}
+            </p:column>
+            <p:column headerText="Cantidad(Kg)">
+                #{users.username}
+            </p:column>
+            <p:column headerText="Valor(Pesos)">
+                #{users.username}
+            </p:column>
+            <p:column headerText="Color">
+                #{users.username}
+            </p:column>
+            <p:column headerText="Referencia">
+                #{users.username}
+            </p:column>
+            <f:facet name="footer">
+                <p:commandButton value="View"/>
+            </f:facet>
+        </p:dataTable>
+    </h:body>
+</html>

@@ -8,6 +8,7 @@ package com.calidadypunto.modelo;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -58,7 +59,7 @@ public class Referencia implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "tabla")
     private String tabla;
-    @OneToMany(mappedBy = "referencia")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "referencia")
     private Collection<Hilo> hiloCollection;
 
     public Referencia() {

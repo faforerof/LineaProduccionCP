@@ -11,8 +11,66 @@
         </ui:insert>
     </h:head>
     <h:body >
-        <div>
-        </div>
+        <p:layout fullPage="false">
+            <p:layoutUnit position="west" size="250" resizable="false" closable="false" >
+                <h:form>
+                    <p:panelMenu style="width:100%">
+                        <p:submenu label="Hilo" expanded="true">
+                            <p:menuitem value="Registrar" onclick="PF('RegistrarHilo').show();PF('AdministrarHilos').close();" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar" onclick="PF('RegistrarHilo').close();PF('AdministrarHilos').show();"  icon="ui-icon-contact" />
+                        </p:submenu>
+                        <p:submenu label="Tejido-teñido" expanded="true">
+                            <p:menuitem value="Registrar" onclick="PF('RegistrarTejido').show();PF('AdministrarTejido').close();" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar" onclick="PF('RegistrarTejido').close();PF('AdministrarTejido').show();"  icon="ui-icon-contact" />
+                        </p:submenu>
+                        <p:separator />
+                        <p:submenu label="Navigations"  expanded="true">
+                            <p:submenu label="Links" icon="ui-icon-extlink">
+                                <p:submenu label="PrimeFaces" icon="ui-icon-heart">
+                                    <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon-home" />
+                                    <p:menuitem value="Docs" url="http://www.primefaces.org/documentation" icon="ui-icon-document" />
+                                    <p:menuitem value="Download" url="http://www.primefaces.org/downloads" icon="ui-icon-arrowthick-1-s" />
+                                    <p:menuitem value="Support" url="http://www.primefaces.org/support" icon="ui-icon-wrench" />
+                                </p:submenu>
+                            </p:submenu>
+                        </p:submenu>
+                    </p:panelMenu>
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <p:panel id="pnl1" style="width: 50%" widgetVar="RegistrarHilo" closable="true" toggleable="true">
+                    <h:outputText value="Hilo" />
+                    <h:form id="hiloForm">
+                        <h:panelGrid id="hiloData" columns="2">
+                            <h:outputText value="Número Factura: " />
+                            <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
+                            <h:outputText value="Peso: " />
+                            <h:inputText value="#{HiloBean.newHilo.peso}" required="true" />
+                            <h:outputText value="Valor Total: " />
+                            <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+                            <h:outputText value="Valor Total: " />
+                            <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+                        </h:panelGrid>
+                        <p:commandButton value="Modificar" action="#{UsersBean.changePassword()}" ajax="false"/>
+                    </h:form>
+                </p:panel>
+                <p:panel id="pnl2" style="width: 50%" widgetVar="AdministrarHilos" closable="true" toggleable="true">
+                    <h:outputText value="Hilo2." />
+                </p:panel>
+                
+                
+                <p:panel id="pnl3" style="width: 100%" widgetVar="RegistrarTejido" closable="true" toggleable="true">
+                    <ui:insert name="header" >
+                        <ui:include src="tejido.xhtml" />
+                    </ui:insert>
+                </p:panel>
+                <p:panel id="pnl4" style="width: 50%" widgetVar="AdministrarTejido" closable="true" toggleable="true">
+                    <h:outputText value="Tejido." />
+                </p:panel>
+            </p:layoutUnit>
+        
+        </p:layout>
+        <p:draggable for="pnl1" />
     </h:body>
 </html>
 
