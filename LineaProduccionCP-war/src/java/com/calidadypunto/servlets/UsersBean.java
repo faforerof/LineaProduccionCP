@@ -9,7 +9,9 @@ import com.calidadypunto.modelo.Users;
 import com.calidadypunto.session.UsersFacade;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -37,10 +39,15 @@ public class UsersBean implements Serializable{
     private Users newUser;
     private String newPassword;
     private String newPassword2;
+    private Map<String,String> roles;
     
     public UsersBean(){
         newUser = new Users();
         selectedUser = new Users();
+        roles  = new HashMap<>();
+        roles.put("Administrador", "0");
+        roles.put("Capturador de Hilo", "1");
+        roles.put("Capturador de Tejido", "2");
     }
     
     public List<Users> getUsersList() {
@@ -101,7 +108,14 @@ public class UsersBean implements Serializable{
     public void setNewPassword2(String newPassword2) {
         this.newPassword2 = newPassword2;
     }   
-    
+
+    public Map<String, String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Map<String, String> roles) {
+        this.roles = roles;
+    }
     
     public String createUser(){
         try{

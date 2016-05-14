@@ -23,6 +23,10 @@
                             <p:menuitem value="Registrar" onclick="PF('RegistrarTejido').show();PF('AdministrarTejido').close();" icon="ui-icon-disk" />
                             <p:menuitem value="Administrar" onclick="PF('RegistrarTejido').close();PF('AdministrarTejido').show();"  icon="ui-icon-contact" />
                         </p:submenu>
+                        <p:submenu label="Proveedores" expanded="true">
+                            <p:menuitem value="Registrar" onclick="PF('RegistrarTejido').show();PF('AdministrarTejido').close();" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar" onclick="PF('RegistrarTejido').close();PF('AdministrarTejido').show();"  icon="ui-icon-contact" />
+                        </p:submenu>
                         <p:separator />
                         <p:submenu label="Navigations"  expanded="true">
                             <p:submenu label="Links" icon="ui-icon-extlink">
@@ -39,33 +43,22 @@
             </p:layoutUnit>
             <p:layoutUnit position="center">
                 <p:panel id="pnl1" style="width: 50%" widgetVar="RegistrarHilo" closable="true" toggleable="true">
-                    <h:outputText value="Hilo" />
-                    <h:form id="hiloForm">
-                        <h:panelGrid id="hiloData" columns="2">
-                            <h:outputText value="Número Factura: " />
-                            <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
-                            <h:outputText value="Peso: " />
-                            <h:inputText value="#{HiloBean.newHilo.peso}" required="true" />
-                            <h:outputText value="Valor Total: " />
-                            <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
-                            <h:outputText value="Valor Total: " />
-                            <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
-                        </h:panelGrid>
-                        <p:commandButton value="Modificar" action="#{UsersBean.changePassword()}" ajax="false"/>
-                    </h:form>
+                    <ui:insert name="header" >
+                        <ui:include src="hiloc.xhtml" />
+                    </ui:insert>
                 </p:panel>
                 <p:panel id="pnl2" style="width: 50%" widgetVar="AdministrarHilos" closable="true" toggleable="true">
                     <h:outputText value="Hilo2." />
                 </p:panel>
-                
-                
-                <p:panel id="pnl3" style="width: 100%" widgetVar="RegistrarTejido" closable="true" toggleable="true">
+                <p:panel id="pnl3" style="width: 95%" widgetVar="RegistrarTejido" closable="true" toggleable="true">
+                    <ui:insert name="header" >
+                        <ui:include src="tejidoc.xhtml" />
+                    </ui:insert>
+                </p:panel>
+                <p:panel id="pnl4" style="width: 95%" widgetVar="AdministrarTejido" closable="true" toggleable="true">
                     <ui:insert name="header" >
                         <ui:include src="tejido.xhtml" />
                     </ui:insert>
-                </p:panel>
-                <p:panel id="pnl4" style="width: 50%" widgetVar="AdministrarTejido" closable="true" toggleable="true">
-                    <h:outputText value="Tejido." />
                 </p:panel>
             </p:layoutUnit>
         
@@ -73,4 +66,3 @@
         <p:draggable for="pnl1" />
     </h:body>
 </html>
-

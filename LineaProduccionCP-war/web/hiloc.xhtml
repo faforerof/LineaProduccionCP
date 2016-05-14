@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <h:outputText value="Hilo" />
+        <h:form id="hiloForm">
+            <h:panelGrid id="hiloData" columns="2">
+                <h:outputText value="Número Factura: " />
+                <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
+                <h:outputText value="Peso: " />
+                <h:inputText value="#{HiloBean.newHilo.peso}" required="true" />
+                <h:outputText value="Valor Total: " />
+                <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+                <h:outputText value="Valor Total: " />
+                <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+            </h:panelGrid>
+            <p:commandButton value="Crear" action="#{HiloBean.createHilo()}" ajax="false"/>
+        </h:form>
+    </h:body>
+</html>
+

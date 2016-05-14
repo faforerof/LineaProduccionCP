@@ -6,39 +6,40 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
-        <p:dataTable id="userasTable" var="users" value="#{UsersBean.usersList}" paginator="true" rows="50"
-                     selection="#{UsersBean.selectedUser}" selectionMode="single" rowKey="#{users.username}" >
+        <h:form>
+            <p:dataTable id="userasTable" var="users" value="#{UsersBean.usersList}" paginator="true" rows="50"
+                         selection="#{UsersBean.selectedUser}" selectionMode="single" rowKey="#{users.username}" >
 
-            <p:ajax event="rowSelect" listener="#{UsersBean.onRowSelect}"/>
+                <p:ajax event="rowSelect" listener="#{UsersBean.onRowSelect}"/>
 
-            <f:facet id="titulo" name="header">
-                Tejido - Teñido
-            </f:facet>
-            <p:column selectionMode="single" style="width:16px;text-align:center"/>
-            <p:column headerText="Número Factura">
-                #{users.nombres}
-            </p:column>
-            <p:column headerText="Lote">
-                #{users.nombres}
-            </p:column>
-            <p:column headerText="Programa">
-                #{users.apellidos}
-            </p:column>
-            <p:column headerText="Cantidad(Kg)">
-                #{users.username}
-            </p:column>
-            <p:column headerText="Valor(Pesos)">
-                #{users.username}
-            </p:column>
-            <p:column headerText="Color">
-                #{users.username}
-            </p:column>
-            <p:column headerText="Referencia">
-                #{users.username}
-            </p:column>
-            <f:facet name="footer">
-                <p:commandButton value="View"/>
-            </f:facet>
-        </p:dataTable>
+                <f:facet id="titulo" name="header">
+                    Tejido - Teñido
+                </f:facet>
+                <p:column headerText="Número Factura">
+                    #{users.nombres}
+                </p:column>
+                <p:column headerText="Lote">
+                    #{users.nombres}
+                </p:column>
+                <p:column headerText="Programa">
+                    #{users.apellidos}
+                </p:column>
+                <p:column headerText="Cantidad(Kg)">
+                    #{users.username}
+                </p:column>
+                <p:column headerText="Valor(Pesos)">
+                    #{users.username}
+                </p:column>
+                <p:column headerText="Color">
+                    #{users.username}
+                </p:column>
+                <p:column headerText="Referencia">
+                    #{users.username}
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton value="View"/>
+                </f:facet>
+            </p:dataTable>
+        </h:form>
     </h:body>
 </html>

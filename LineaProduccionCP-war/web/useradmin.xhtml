@@ -64,7 +64,10 @@
                     <h:outputText value="Contraseña: " />
                     <h:inputSecret value="#{UsersBean.newUser.password}" required="true"/>
                     <h:outputText value="Rol: " />
-                    <p:inputText value="#{UsersBean.newUser.rol}" />
+                    <p:selectOneMenu id="city" value="#{UsersBean.newUser.rol}" style="width:150px">
+                        <f:selectItem itemLabel="Seleccione un rol" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{UsersBean.roles}" />
+                    </p:selectOneMenu>
                 </h:panelGrid>
                 <p:commandButton value="Crear" action="#{UsersBean.createUser()}" ajax="false"/>
                 <p:commandButton value="Cancelar" onclick="createDialog.close()" ajax="false"/>
