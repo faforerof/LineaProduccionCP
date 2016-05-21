@@ -10,7 +10,7 @@
             <ui:include src="header.xhtml" />
         </ui:insert>
     </h:head>
-    <h:body >
+    <h:body>
         <p:layout fullPage="false">
             <p:layoutUnit position="west" size="250" resizable="false" closable="false" >
                 <h:form>
@@ -24,8 +24,8 @@
                             <p:menuitem value="Administrar" onclick="PF('RegistrarTejido').close();PF('AdministrarTejido').show();"  icon="ui-icon-contact" />
                         </p:submenu>
                         <p:submenu label="Proveedores" expanded="true">
-                            <p:menuitem value="Registrar" onclick="PF('RegistrarTejido').show();PF('AdministrarTejido').close();" icon="ui-icon-disk" />
-                            <p:menuitem value="Administrar" onclick="PF('RegistrarTejido').close();PF('AdministrarTejido').show();"  icon="ui-icon-contact" />
+                            <p:menuitem value="Registrar" onclick="PF('RegistrarProveedor').show();PF('AdministrarProveedor').close();" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar" onclick="PF('RegistrarProveedor').close();PF('AdministrarProveedor').show();"  icon="ui-icon-contact" />
                         </p:submenu>
                         <p:separator />
                         <p:submenu label="Navigations"  expanded="true">
@@ -42,7 +42,7 @@
                 </h:form>
             </p:layoutUnit>
             <p:layoutUnit position="center">
-                <p:panel id="pnl1" style="width: 50%" widgetVar="RegistrarHilo" closable="true" toggleable="true">
+                <p:panel id="pnl1" style="width: 80%" widgetVar="RegistrarHilo" closable="true" toggleable="true">
                     <ui:insert name="header" >
                         <ui:include src="hiloc.xhtml" />
                     </ui:insert>
@@ -58,6 +58,16 @@
                 <p:panel id="pnl4" style="width: 95%" widgetVar="AdministrarTejido" closable="true" toggleable="true">
                     <ui:insert name="header" >
                         <ui:include src="tejido.xhtml" />
+                    </ui:insert>
+                </p:panel>
+                <p:panel id="pnl5" style="width: 95%" widgetVar="RegistrarProveedor" closable="true" toggleable="true">
+                    <ui:insert name="header" >
+                        <ui:include src="proveedorc.xhtml" />
+                    </ui:insert>
+                </p:panel>
+                <p:panel id="pnl6" style="width: 95%" widgetVar="AdministrarProveedor" closable="true" toggleable="true">
+                    <ui:insert name="header" >
+                        <!--ui:include src="proveedorc.xhtml" /-->
                     </ui:insert>
                 </p:panel>
             </p:layoutUnit>

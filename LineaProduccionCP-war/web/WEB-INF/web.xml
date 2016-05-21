@@ -25,5 +25,4 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>blitzer</param-value>
     </context-param>
-    
 </web-app>
