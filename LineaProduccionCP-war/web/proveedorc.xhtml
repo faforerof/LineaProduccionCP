@@ -8,13 +8,11 @@
         <h:outputText value="Proveedor" />
         <h:form id="proveedorForm">
             <h:panelGrid id="proveedorData" columns="2">
-                
                 <p:outputLabel for="advanced" value="Tipo de Identificación: "/>
-                <p:selectOneMenu id="advanced" value="#{ProveedorBean.newProveedor.tipoIdProveedor}" converter="#{tipoIdentificacionConverter}"
-                                 var="tipoIdVar">
+                <h:selectOneMenu id="advanced" value="#{ProveedorBean.newProveedor.tipoIdProveedor}" converter="#{tipoIdentificacionConverter}">
                     <f:selectItems value="#{ProveedorBean.identificaciones}" var="tipoIdentificacion" 
                                    itemLabel="#{tipoIdentificacion.descripcion}" itemValue="#{tipoIdentificacion}" />
-                </p:selectOneMenu>
+                </h:selectOneMenu>
                 <h:outputText value="Número de Identificación: " />
                 <h:inputText value="#{ProveedorBean.newProveedor.numeroIdProveedor}" required="true" />
                 <h:outputText value="Nombre Proveedor: " />

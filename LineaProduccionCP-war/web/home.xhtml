@@ -16,16 +16,16 @@
                 <h:form>
                     <p:panelMenu style="width:100%">
                         <p:submenu label="Hilo" expanded="true">
-                            <p:menuitem value="Registrar" onclick="PF('RegistrarHilo').show();PF('AdministrarHilos').close();" icon="ui-icon-disk" />
-                            <p:menuitem value="Administrar" onclick="PF('RegistrarHilo').close();PF('AdministrarHilos').show();"  icon="ui-icon-contact" />
+                            <p:menuitem value="Registrar" action="#{HomeBean.hideAllDialogs('RegistrarHilo')}" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar" action="#{HomeBean.hideAllDialogs('AdministrarHilos')}"  icon="ui-icon-contact" />
                         </p:submenu>
                         <p:submenu label="Tejido-teñido" expanded="true">
-                            <p:menuitem value="Registrar" onclick="PF('RegistrarTejido').show();PF('AdministrarTejido').close();" icon="ui-icon-disk" />
-                            <p:menuitem value="Administrar" onclick="PF('RegistrarTejido').close();PF('AdministrarTejido').show();"  icon="ui-icon-contact" />
+                            <p:menuitem value="Registrar" action="#{HomeBean.hideAllDialogs('RegistrarTejido')}" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar" action="#{HomeBean.hideAllDialogs('AdministrarTejido')}"  icon="ui-icon-contact" />
                         </p:submenu>
                         <p:submenu label="Proveedores" expanded="true">
-                            <p:menuitem value="Registrar" onclick="PF('RegistrarProveedor').show();PF('AdministrarProveedor').close();" icon="ui-icon-disk" />
-                            <p:menuitem value="Administrar" onclick="PF('RegistrarProveedor').close();PF('AdministrarProveedor').show();"  icon="ui-icon-contact" />
+                            <p:menuitem value="Registrar" action="#{HomeBean.hideAllDialogs('RegistrarProveedor')}" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar" action="#{HomeBean.hideAllDialogs('AdministrarProveedor')}"  icon="ui-icon-contact" />
                         </p:submenu>
                         <p:separator />
                         <p:submenu label="Navigations"  expanded="true">
@@ -67,7 +67,7 @@
                 </p:panel>
                 <p:panel id="pnl6" style="width: 95%" widgetVar="AdministrarProveedor" closable="true" toggleable="true">
                     <ui:insert name="header" >
-                        <!--ui:include src="proveedorc.xhtml" /-->
+                        <ui:include src="proveedor.xhtml" />
                     </ui:insert>
                 </p:panel>
             </p:layoutUnit>

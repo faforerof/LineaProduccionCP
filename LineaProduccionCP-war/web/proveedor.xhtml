@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <h:form>
+            <p:dataTable id="proveedorTable" var="proveedor" value="#{ProveedorBean.proveedorList}" paginator="true" rows="50"
+                         selection="#{ProveedorBean.selectedProveedor}" selectionMode="single" rowKey="#{proveedor.idproveedor}" >
+
+                <p:ajax event="rowSelect" listener="#{ProveedorBean.onRowSelect}"/>
+
+                <f:facet id="titulo" name="header">
+                    <h:form id="buttons">
+                        <p:commandButton update=":buttonsProveedorEdit" style="float: left" value="Editar" onclick="PF('modifyProveedorDialog').show();" />
+                        <p:commandButton style="float: right" value="Eliminar" onclick="PF('deleteProveedorDialog').show();"/>
+                    </h:form> 
+                    Proveedores
+                </f:facet>
+                <p:column headerText="Tipo Identificación">
+                    #{proveedor.tipoIdProveedor.descripcion}
+                </p:column>
+                <p:column headerText="Número de Identificación">
+                    #{proveedor.numeroIdProveedor}
+                </p:column>
+                <p:column headerText="Nombre Proveedor">
+                    #{proveedor.nombreProveedor}
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <p:dialog header="Error" widgetVar="errorProveedorDialog" modal="true"
+                  showEffect="explode" hideEffect="explode" >
+            <h:form>
+                <h:outputText value="Por favor seleccione un usuario" /><br/>
+                <p:commandButton value="Ok" style="float: right" onclick="errorDialog.hide()"/>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="modifyProveedorDlg" widgetVar="modifyProveedorDialog"
+                  header="Editar" showEffect="explode" hideEffect="explode" >
+            <h:form id="buttonsProveedorEdit">
+                <h:panelGrid id="modifyProveedorData" columns="2">
+                    <p:outputLabel for="advanced" value="Tipo de Identificación: "/>
+                    <h:selectOneMenu id="advanced" value="#{ProveedorBean.modifyProveedor.tipoIdProveedor}" converter="#{tipoIdentificacionConverter}">
+                        <f:selectItems value="#{ProveedorBean.identificaciones}" var="tipoIdentificacion" 
+                                       itemLabel="#{tipoIdentificacion.descripcion}" itemValue="#{tipoIdentificacion}" />
+                    </h:selectOneMenu>
+                    <h:outputText value="Número de Identificación: " />
+                    <h:inputText value="#{ProveedorBean.modifyProveedor.numeroIdProveedor}" required="true" />
+                    <h:outputText value="Nombre Proveedor: " />
+                    <h:inputText value="#{ProveedorBean.modifyProveedor.nombreProveedor}" required="true" />
+                </h:panelGrid>
+                <p:commandButton value="Modificar" action="#{ProveedorBean.editProveedor()}" ajax="false"/>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="deleteProveedorDlg" widgetVar="deleteProveedorDialog"
+                  header="Eliminar" modal="true" showEffect="explode" hideEffect="explode" >
+            <h:form id="buttonsProveedorDelete">
+                <h:panelGrid id="deleteProveedorData" columns="2">
+                    <h:outputText value="¿Está seguro que desea eliminar el proveedor?" />
+                </h:panelGrid>
+                <p:commandButton value="Eliminar" action="#{ProveedorBean.deleteProveedor()}" ajax="false"/>
+                <p:commandButton value="Cancelar" onclick="deleteProveedorDlg.hide();" />
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

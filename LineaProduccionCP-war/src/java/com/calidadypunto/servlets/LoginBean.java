@@ -105,7 +105,6 @@ public class LoginBean implements Serializable{
     public String logout(HttpServletRequest request){
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
-        System.err.println("JODER");
         return "login.xhtml?faces-redirect=true";
     }
     
