@@ -10,18 +10,17 @@
             <h:panelGrid id="proveedorData" columns="2">
                 
                 <p:outputLabel for="advanced" value="Tipo de Identificación: "/>
-                <p:selectOneMenu id="advanced" value="#{ProveedorBean.newProveedor.tipoIdProveedor}" converter="tipoIdConverter"
+                <p:selectOneMenu id="advanced" value="#{ProveedorBean.newProveedor.tipoIdProveedor}" converter="#{tipoIdentificacionConverter}"
                                  var="tipoIdVar">
-                    <f:selectItems value="#{ProveedorBean.tiposIdentificacion}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+                    <f:selectItems value="#{ProveedorBean.identificaciones}" var="tipoIdentificacion" 
+                                   itemLabel="#{tipoIdentificacion.descripcion}" itemValue="#{tipoIdentificacion}" />
                 </p:selectOneMenu>
-                
-                
                 <h:outputText value="Número de Identificación: " />
-                <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
+                <h:inputText value="#{ProveedorBean.newProveedor.numeroIdProveedor}" required="true" />
                 <h:outputText value="Nombre Proveedor: " />
-                <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
+                <h:inputText value="#{ProveedorBean.newProveedor.nombreProveedor}" required="true" />
             </h:panelGrid>
-            <p:commandButton value="Crear" action="#{HiloBean.createHilo()}" ajax="false"/>
+            <p:commandButton value="Crear" action="#{ProveedorBean.createProveedor()}" ajax="false"/>
         </h:form>
     </h:body>
 </html>
