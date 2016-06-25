@@ -14,12 +14,23 @@ import com.calidadypunto.modelo.Proveedor;
 import com.calidadypunto.modelo.Referencia;
 import com.calidadypunto.session.ProveedorFacade;
 import com.calidadypunto.session.ReferenciaFacade;
+import com.calidadypunto.utilidades.Utilidades;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -38,11 +49,15 @@ public class HiloBean {
     private List<Referencia> referencias;
     private List<Proveedor> proveedores;
     private UploadedFile file;
-    
+    private List<Hilo> hiloList;
+    private Hilo selectedHilo;
+    private Hilo modifyHilo;
+    private StreamedContent fileDownload;
     private Hilo newHilo;
     
     public HiloBean(){
         newHilo = new Hilo();
+        modifyHilo = new Hilo();
     }
 
     public Hilo getNewHilo() {
@@ -59,6 +74,46 @@ public class HiloBean {
 
     public void setFile(UploadedFile file) {
         this.file = file;
+    }
+
+    public List<Hilo> getHiloList() {
+        if(hiloList == null || hiloList.isEmpty()){
+            hiloList = hiloFacade.findAll();
+        }
+        return hiloList;
+    }
+
+    public void setHiloList(List<Hilo> hiloList) {
+        this.hiloList = hiloList;
+    }
+
+    public Hilo getSelectedHilo() {
+        return selectedHilo;
+    }
+
+    public void setSelectedHilo(Hilo selectedHilo) {
+        this.selectedHilo = selectedHilo;
+    }
+
+    public Hilo getModifyHilo() {
+        return modifyHilo;
+    }
+
+    public void setModifyHilo(Hilo modifyHilo) {
+        this.modifyHilo = modifyHilo;
+    }
+    
+    public void onRowSelect(SelectEvent event){
+        selectedHilo = ((Hilo) event.getObject());
+        modifyHilo = selectedHilo;
+    }
+
+    public StreamedContent getFileDownload() throws IOException {
+        InputStream stream = new ByteArrayInputStream(selectedHilo.getDocumento());
+        File f = File.createTempFile(Utilidades.rellenarCerosIzquierda("0", selectedHilo.getFactura(), 3), "."+selectedHilo.getExtension());
+        Path path = Paths.get(f.getPath());
+        fileDownload = new DefaultStreamedContent(stream, Files.probeContentType(path), selectedHilo.getFactura() + "." + selectedHilo.getExtension());
+        return fileDownload;
     }
     
     public List<Proveedor> completeProveedor(String query) {
@@ -98,11 +153,30 @@ public class HiloBean {
     
     public String createHilo(){
         try{
+            if(file != null){
+                newHilo.setDocumento(file.getContents());
+                String[] nombreArchivo = file.getFileName().split("\\.");
+                newHilo.setExtension(nombreArchivo[nombreArchivo.length-1]);
+            }
             newHilo.setPesoUsado(new BigDecimal(0));
-            newHilo.setDocumento(file.getContents());
             hiloFacade.create(newHilo);
         } catch (Exception ex) {
             addMessage("¡Error!", "No se puede registrar el hilo.", FacesMessage.SEVERITY_ERROR);
+            return "";
+        }
+        return "home.xhtml?faces-redirect=true";
+    }
+    
+    public String editHilo(){
+        try{
+            if(file != null){
+                modifyHilo.setDocumento(file.getContents());
+                String[] nombreArchivo = file.getFileName().split("\\.");
+                modifyHilo.setExtension(nombreArchivo[nombreArchivo.length-1]);
+            }
+            hiloFacade.edit(modifyHilo);
+        } catch (Exception ex) {
+            addMessage("¡Error!", "No se puede modificar el hilo.", FacesMessage.SEVERITY_ERROR);
             return "";
         }
         return "home.xhtml?faces-redirect=true";

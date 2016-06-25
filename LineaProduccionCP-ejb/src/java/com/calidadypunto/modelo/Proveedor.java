@@ -39,6 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Proveedor.findByNumeroIdProveedor", query = "SELECT p FROM Proveedor p WHERE p.numeroIdProveedor = :numeroIdProveedor")})
 public class Proveedor implements Serializable {
 
+    @OneToMany(mappedBy = "proveedor")
+    private Collection<Tejido> tejidoCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -135,6 +138,15 @@ public class Proveedor implements Serializable {
     @Override
     public String toString() {
         return "com.calidadypunto.modelo.Proveedor[ idproveedor=" + idproveedor + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Tejido> getTejidoCollection() {
+        return tejidoCollection;
+    }
+
+    public void setTejidoCollection(Collection<Tejido> tejidoCollection) {
+        this.tejidoCollection = tejidoCollection;
     }
     
 }

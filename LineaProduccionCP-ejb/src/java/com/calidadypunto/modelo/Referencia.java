@@ -38,6 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Referencia.findByTabla", query = "SELECT r FROM Referencia r WHERE r.tabla = :tabla")})
 public class Referencia implements Serializable {
 
+    @OneToMany(mappedBy = "referencia")
+    private Collection<Tejido> tejidoCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -140,6 +143,15 @@ public class Referencia implements Serializable {
     @Override
     public String toString() {
         return "com.calidadypunto.modelo.Referencia[ idreferencia=" + idreferencia + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Tejido> getTejidoCollection() {
+        return tejidoCollection;
+    }
+
+    public void setTejidoCollection(Collection<Tejido> tejidoCollection) {
+        this.tejidoCollection = tejidoCollection;
     }
     
 }

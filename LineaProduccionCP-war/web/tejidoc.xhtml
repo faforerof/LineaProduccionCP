@@ -14,19 +14,27 @@ and open the template in the editor.
         <h:form id="tejidoForm">
             <h:panelGrid id="hiloData" columns="2">
                 <h:outputText value="Número Factura: " />
-                <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
+                <h:inputText value="#{TejidoBean.newTejido.factura}" required="true" />
                 <h:outputText value="Lote: " />
-                <h:inputText value="#{HiloBean.newHilo.peso}" required="true" />
+                <h:inputText value="#{TejidoBean.newTejido.lote}" required="true" />
                 <h:outputText value="Programa: " />
-                <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+                <h:inputText value="#{TejidoBean.newTejido.programa}" required="true" />
                 <h:outputText value="Cantidad(Kg): " />
-                <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+                <h:inputText value="#{TejidoBean.newTejido.cantidad}" required="true" />
                 <h:outputText value="Valor(Pesos): " />
-                <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+                <h:inputText value="#{TejidoBean.newTejido.valor}" required="true" />
                 <h:outputText value="Color: " />
-                <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
-                <h:outputText value="Referencia: " />
-                <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+                <h:inputText value="#{TejidoBean.newTejido.color}" required="true" />
+                <h:outputText value="Hilo: " />
+                <p:autoComplete value="#{TejidoBean.newTejido.referencia}" completeMethod="#{HiloBean.completeReferencia}"
+                                var="referencia" itemLabel="#{referencia.nombreReferencia}" 
+                                converter="#{referenciaConverter}" itemValue="#{referencia}" forceSelection="true" />
+                <h:outputText value="Documento: " />
+                <p:autoComplete value="#{HiloBean.newHilo.referencia}" completeMethod="#{HiloBean.completeReferencia}"
+                                var="referencia" itemLabel="#{referencia.nombreReferencia}" 
+                                converter="#{referenciaConverter}" itemValue="#{referencia}" forceSelection="true" />
+                <h:outputText value="Documento: " />
+                <p:fileUpload value="#{HiloBean.file}" mode="simple" skinSimple="true" fileUploadListener="#{HiloBean.handleFileUpload}"/>
             </h:panelGrid>
             <p:commandButton value="Crear" action="#{UsersBean.changePassword()}" ajax="false"/>
         </h:form>

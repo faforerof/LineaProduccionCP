@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <h:form>
+            <p:dataTable id="holoTable" var="hilos" value="#{HiloBean.hiloList}" paginator="true" rows="50"
+                         selection="#{HiloBean.selectedHilo}" selectionMode="single" rowKey="#{hilos.idhilo}" >
+
+                <p:ajax event="rowSelect" listener="#{HiloBean.onRowSelect}"/>
+
+                <f:facet id="titulo" name="header">
+                    <h:form id="buttons">
+                        <p:commandButton update=":buttonsHiloEdit" style="float: left" value="Editar" onclick="PF('modifyHiloDialog').show();" />
+                        <p:commandButton style="float: right" value="Eliminar" onclick="PF('deleteHiloDialog').show();"/>
+                    </h:form> 
+                    Hilo
+                </f:facet>
+                <p:column headerText="Número Factura">
+                    #{hilos.factura}
+                </p:column>
+                <p:column headerText="Peso Total(Kg)">
+                    #{hilos.peso}
+                </p:column>
+                <p:column headerText="Peso Restante(Kg)">
+                    #{hilos.pesoUsado}
+                </p:column>
+                <p:column headerText="Referencia">
+                    #{hilos.referencia.nombreReferencia} - #{hilos.referencia.descripcion}
+                </p:column>
+                <p:column headerText="Valor Total(Pesos)">
+                    #{hilos.valorTotal}
+                </p:column>
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton ajax="true" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                        <f:setPropertyActionListener value="#{hilos}" target="#{HiloBean.selectedHilo}" />
+                        <p:fileDownload value="#{HiloBean.fileDownload}" />
+                    </p:commandButton>
+               </p:column>
+            </p:dataTable>
+        </h:form>
+        
+        <p:dialog header="Error" widgetVar="errorHiloDialog" modal="true"
+                  showEffect="explode" hideEffect="explode" >
+            <h:form>
+                <h:outputText value="Por favor seleccione un usuario" /><br/>
+                <p:commandButton value="Ok" style="float: right" onclick="errorDialog.hide()"/>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="modifyHiloDlg" widgetVar="modifyHiloDialog"
+                  header="Editar" showEffect="explode" hideEffect="explode" >
+            <h:form id="buttonsHiloEdit" enctype="multipart/form-data">
+                <h:panelGrid id="modifyHiloData" columns="2">
+                    <h:outputText value="Número Factura: " />
+                    <h:inputText value="#{HiloBean.modifyHilo.factura}" required="true" />
+                    <h:outputText value="Peso(Kg): " />
+                    <h:inputText value="#{HiloBean.modifyHilo.peso}" required="true" />
+                    <h:outputText value="Valor Total(Pesos): " />
+                    <h:inputText value="#{HiloBean.modifyHilo.valorTotal}" required="true" />
+                    <h:outputText value="Proveedor: " />
+                    <p:autoComplete value="#{HiloBean.modifyHilo.distribuidor}" completeMethod="#{HiloBean.completeProveedor}"
+                                    var="proveedor" itemLabel="#{proveedor.numeroIdProveedor} - #{proveedor.nombreProveedor}" 
+                                    converter="#{proveedorConverter}" itemValue="#{proveedor}" forceSelection="true" />
+                    <h:outputText value="Referencia: " />
+                    <p:autoComplete value="#{HiloBean.modifyHilo.referencia}" completeMethod="#{HiloBean.completeReferencia}"
+                                    var="referencia" itemLabel="#{referencia.nombreReferencia}" 
+                                    converter="#{referenciaConverter}" itemValue="#{referencia}" forceSelection="true" />
+                    <h:outputText value="Documento: " />
+                    <p:fileUpload value="#{HiloBean.file}" mode="simple" skinSimple="true" fileUploadListener="#{HiloBean.handleFileUpload}"/>
+                </h:panelGrid>
+                <p:commandButton value="Modificar" action="#{HiloBean.editHilo()}" ajax="false"/>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="deleteHiloDlg" widgetVar="deleteHiloDialog"
+                  header="Eliminar" modal="true" showEffect="explode" hideEffect="explode" >
+            <h:form id="buttonsHiloDelete">
+                <h:panelGrid id="deleteHiloData" columns="2">
+                    <h:outputText value="¿Está seguro que desea eliminar el hilo?" />
+                </h:panelGrid>
+                <p:commandButton value="Eliminar" action="#{HiloBean.deleteHilo()}" ajax="false"/>
+                <p:commandButton value="Cancelar" onclick="deleteHiloDlg.hide();" />
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

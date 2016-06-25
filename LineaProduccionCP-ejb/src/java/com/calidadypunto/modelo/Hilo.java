@@ -7,6 +7,7 @@ package com.calidadypunto.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,10 +19,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,6 +41,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Hilo.findByPesoUsado", query = "SELECT h FROM Hilo h WHERE h.pesoUsado = :pesoUsado"),
     @NamedQuery(name = "Hilo.findByValorTotal", query = "SELECT h FROM Hilo h WHERE h.valorTotal = :valorTotal")})
 public class Hilo implements Serializable {
+
+    @Lob
+    @Column(name = "Documento")
+    private byte[] documento;
+    @OneToMany(mappedBy = "hilo")
+    private Collection<Tejido> tejidoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,9 +70,8 @@ public class Hilo implements Serializable {
     @NotNull
     @Column(name = "valor_total")
     private BigDecimal valorTotal;
-    @Lob
-    @Column(name = "Documento")
-    private byte[] documento;
+    @Column(name = "extension")
+    private String extension;
     @JoinColumn(name = "distribuidor", referencedColumnName = "idproveedor")
     @ManyToOne(optional = false)
     private Proveedor distribuidor;
@@ -125,13 +133,6 @@ public class Hilo implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public byte[] getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(byte[] documento) {
-        this.documento = documento;
-    }
 
     public Proveedor getDistribuidor() {
         return distribuidor;
@@ -149,6 +150,14 @@ public class Hilo implements Serializable {
         this.referencia = referencia;
     }
 
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -172,6 +181,23 @@ public class Hilo implements Serializable {
     @Override
     public String toString() {
         return "com.calidadypunto.modelo.Hilo[ idhilo=" + idhilo + " ]";
+    }
+
+    public byte[] getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(byte[] documento) {
+        this.documento = documento;
+    }
+
+    @XmlTransient
+    public Collection<Tejido> getTejidoCollection() {
+        return tejidoCollection;
+    }
+
+    public void setTejidoCollection(Collection<Tejido> tejidoCollection) {
+        this.tejidoCollection = tejidoCollection;
     }
     
 }
