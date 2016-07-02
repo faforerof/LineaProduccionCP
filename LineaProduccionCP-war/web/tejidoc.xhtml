@@ -26,15 +26,11 @@ and open the template in the editor.
                 <h:outputText value="Color: " />
                 <h:inputText value="#{TejidoBean.newTejido.color}" required="true" />
                 <h:outputText value="Hilo: " />
-                <p:autoComplete value="#{TejidoBean.newTejido.referencia}" completeMethod="#{HiloBean.completeReferencia}"
-                                var="referencia" itemLabel="#{referencia.nombreReferencia}" 
-                                converter="#{referenciaConverter}" itemValue="#{referencia}" forceSelection="true" />
+                <p:autoComplete value="#{TejidoBean.newTejido.hilo}" completeMethod="#{TejidoBean.completeHilo}"
+                                var="hilo" itemLabel="#{hilo.factura} - #{hilo.peso} - #{hilo.pesoUsado} - #{hilo.referencia.descripcion}"
+                                converter="#{hiloConverter}" itemValue="#{hilo}" forceSelection="true" />
                 <h:outputText value="Documento: " />
-                <p:autoComplete value="#{HiloBean.newHilo.referencia}" completeMethod="#{HiloBean.completeReferencia}"
-                                var="referencia" itemLabel="#{referencia.nombreReferencia}" 
-                                converter="#{referenciaConverter}" itemValue="#{referencia}" forceSelection="true" />
-                <h:outputText value="Documento: " />
-                <p:fileUpload value="#{HiloBean.file}" mode="simple" skinSimple="true" fileUploadListener="#{HiloBean.handleFileUpload}"/>
+                <p:fileUpload value="#{TejidoBean.file}" mode="simple" skinSimple="true" fileUploadListener="#{TejidoBean.handleFileUpload}"/>
             </h:panelGrid>
             <p:commandButton value="Crear" action="#{UsersBean.changePassword()}" ajax="false"/>
         </h:form>
