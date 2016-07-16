@@ -58,7 +58,21 @@ and open the template in the editor.
 .tituloRegistro {
     font-family: Arial,sans-serif;
     color: #444;
-    margin: 0;
-    font-size: 1.1em;
+    margin-bottom: 100px;
+    font-size: 1.5em;
     font-weight: bold;
+    border-bottom: 1px solid #b09f9f; 
+    padding-bottom: 20px;    
+}
+
+.forty-percent {
+     width: 23%;
+}
+
+.sixty-percent {
+     width: 30%;
+}
+
+.top-alignment {
+     vertical-align: top;
 }

@@ -5,9 +5,9 @@
       xmlns:p="http://primefaces.org/ui">
     <h:body>
         <div class="panelRegistro">
-            <h:outputText value="Hilo" class="tituloRegistro" />
+            <h3 style="border-bottom: 1px solid #b09f9f; padding-bottom: 5px;font-size: 1.8em;margin-top: -5px" align="center">Hilo</h3>
             <h:form id="hiloForm" enctype="multipart/form-data">
-                <h:panelGrid id="hiloData" columns="4">
+                <h:panelGrid id="hiloData" columns="4" columnClasses="forty-percent top-alignment, sixty-percent top-alignment,forty-percent top-alignment, sixty-percent top-alignment">
                     <h:outputText value="Número Factura: " />
                     <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
                     <h:outputText value="Peso(Kg): " />
