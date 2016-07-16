@@ -11,7 +11,7 @@
         </ui:insert>
     </h:head>
     <h:body>
-        <p:layout fullPage="false">
+        <p:layout fullPage="true">
             <p:layoutUnit position="west" size="250" resizable="false" closable="false" >
                 <h:form>
                     <p:panelMenu style="width:100%">
@@ -41,7 +41,7 @@
                     </p:panelMenu>
                 </h:form>
             </p:layoutUnit>
-            <p:layoutUnit position="center">
+            <p:layoutUnit position="center" resizable="false">
                 <p:panel id="pnl1" style="width: 80%" widgetVar="RegistrarHilo" closable="true" toggleable="true" visible="false">
                     <ui:insert name="header" >
                         <ui:include src="hiloc.xhtml" />

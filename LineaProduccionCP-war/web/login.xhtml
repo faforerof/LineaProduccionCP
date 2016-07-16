@@ -8,13 +8,27 @@
 
     <f:view contentType="text/html">
         <h:head>
+            <h:outputStylesheet library="css" name="base.css"  />
             <title>Linea de Producción CYP</title>
         </h:head>
         <h:body>
-            <p:layout fullPage="true">
-                <p:layoutUnit position="center" >
-                    <div align="center">
-                        <h3>Calidad y Punto</h3>
+            <p:layout fullPage="true" >
+                <p:layoutUnit position="north" size="17%">
+                    <p:panelGrid style="width: 100%;">
+                        <p:row style="border: 0; height: 100%;">
+                            <p:column style="width: 15%;border: 0;"></p:column>
+                            <p:column style="width: 70%;border: 0;">
+                                <h:graphicImage value="resources/images/cyplogom.png"/>
+                                <h:outputText value="Calidad y Punto Confecciones" class="textoCentrado"></h:outputText>
+                                <h:outputText value=" - Solución Integral para el Seguimiento de Operación" class="textoCentrado"></h:outputText>
+                            </p:column>
+                            <p:column style="width: 15%;border: 0;"></p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <div align="center" class="corners">
+                        <h3 style="border-bottom: 1px solid #b09f9f; padding-bottom: 20px;">Calidad y Punto</h3>
                         <h:form id="loginForm">
                             <h:panelGrid id="form" columns="3">
                                 Usuario:<br/>

@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-jul-2016, 10:00:31
+    Author     : lenovo
+*/
+
+
+.ui-layout-container {
+    background-image:url('images/fondo.jpg');
+    background-size: 100%;
+}
+
+.ui-widget-content {
+    background: 0!important;
+    border: 0!important;
+}
+
+.ui-layout-pane-north {
+    background: 0;
+    background-color: rgba(255,255,255,0.8)!important;
+    overflow:hidden!important;
+}
+
+.ui-layout-west {
+    background: 0;
+    background-color: rgba(255,255,255,0.8)!important;
+}
+
+.ui-layout-center {
+    background: 0;
+    background-color: rgba(255,255,255,0.8)!important;
+}
+
+.textoCentrado {
+    vertical-align: 150%;
+    font-family: Arial,sans-serif;
+    color: #444;
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.panelRegistro {
+    border-radius: 15px;
+    border: 1px solid #d4100e;
+    padding: 20px;
+    width: 30%;
+    border-style: outset;
+    box-shadow: 0px 5px 15px;
+    background-color: rgba(255,255,255,0.8);
+    width: 100%;
+}
+
+.tituloRegistro {
+    font-family: Arial,sans-serif;
+    color: #444;
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}

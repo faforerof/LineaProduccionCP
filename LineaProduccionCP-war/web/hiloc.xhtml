@@ -4,28 +4,30 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:body>
-        <h:outputText value="Hilo" />
-        <h:form id="hiloForm" enctype="multipart/form-data">
-            <h:panelGrid id="hiloData" columns="2">
-                <h:outputText value="Número Factura: " />
-                <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
-                <h:outputText value="Peso(Kg): " />
-                <h:inputText value="#{HiloBean.newHilo.peso}" required="true" />
-                <h:outputText value="Valor Total(Pesos): " />
-                <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
-                <h:outputText value="Proveedor: " />
-                <p:autoComplete value="#{HiloBean.newHilo.distribuidor}" completeMethod="#{HiloBean.completeProveedor}"
-                                var="proveedor" itemLabel="#{proveedor.numeroIdProveedor} - #{proveedor.nombreProveedor}" 
-                                converter="#{proveedorConverter}" itemValue="#{proveedor}" forceSelection="true" />
-                <h:outputText value="Referencia: " />
-                <p:autoComplete value="#{HiloBean.newHilo.referencia}" completeMethod="#{HiloBean.completeReferencia}"
-                                var="referencia" itemLabel="#{referencia.nombreReferencia}" 
-                                converter="#{referenciaConverter}" itemValue="#{referencia}" forceSelection="true" />
-                <h:outputText value="Documento: " />
-                <p:fileUpload value="#{HiloBean.file}" mode="simple" skinSimple="true" fileUploadListener="#{HiloBean.handleFileUpload}"/>
-            </h:panelGrid>
-            <p:commandButton value="Crear" action="#{HiloBean.createHilo()}" ajax="false"/>
-        </h:form>
+        <div class="panelRegistro">
+            <h:outputText value="Hilo" class="tituloRegistro" />
+            <h:form id="hiloForm" enctype="multipart/form-data">
+                <h:panelGrid id="hiloData" columns="4">
+                    <h:outputText value="Número Factura: " />
+                    <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
+                    <h:outputText value="Peso(Kg): " />
+                    <h:inputText value="#{HiloBean.newHilo.peso}" required="true" />
+                    <h:outputText value="Valor Total(Pesos): " />
+                    <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+                    <h:outputText value="Proveedor: " />
+                    <p:autoComplete value="#{HiloBean.newHilo.distribuidor}" completeMethod="#{HiloBean.completeProveedor}"
+                                    var="proveedor" itemLabel="#{proveedor.numeroIdProveedor} - #{proveedor.nombreProveedor}" 
+                                    converter="#{proveedorConverter}" itemValue="#{proveedor}" forceSelection="true" />
+                    <h:outputText value="Referencia: " />
+                    <p:autoComplete value="#{HiloBean.newHilo.referencia}" completeMethod="#{HiloBean.completeReferencia}"
+                                    var="referencia" itemLabel="#{referencia.nombreReferencia}" 
+                                    converter="#{referenciaConverter}" itemValue="#{referencia}" forceSelection="true" />
+                    <h:outputText value="Documento: " />
+                    <p:fileUpload value="#{HiloBean.file}" mode="simple" skinSimple="true" fileUploadListener="#{HiloBean.handleFileUpload}"/>
+                </h:panelGrid>
+                <p:commandButton value="Crear" action="#{HiloBean.createHilo()}" ajax="false"/>
+            </h:form>
+        </div>
     </h:body>
 </html>
 
