@@ -183,13 +183,6 @@ public class Hilo implements Serializable {
         return "com.calidadypunto.modelo.Hilo[ idhilo=" + idhilo + " ]";
     }
 
-    public byte[] getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(byte[] documento) {
-        this.documento = documento;
-    }
 
     @XmlTransient
     public Collection<Tejido> getTejidoCollection() {
@@ -198,6 +191,14 @@ public class Hilo implements Serializable {
 
     public void setTejidoCollection(Collection<Tejido> tejidoCollection) {
         this.tejidoCollection = tejidoCollection;
+    }
+
+    public byte[] getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(byte[] documento) {
+        this.documento = documento;
     }
     
 }

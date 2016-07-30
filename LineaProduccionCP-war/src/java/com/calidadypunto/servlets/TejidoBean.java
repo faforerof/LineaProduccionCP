@@ -11,8 +11,12 @@ import com.calidadypunto.session.HiloFacade;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -28,6 +32,7 @@ public class TejidoBean {
     private Tejido modifyTejido;
     @EJB
     private HiloFacade hiloFacade;
+    private UploadedFile file;
     
     public TejidoBean(){
         newTejido = new Tejido();
@@ -65,8 +70,14 @@ public class TejidoBean {
     public void setModifyTejido(Tejido modifyTejido) {
         this.modifyTejido = modifyTejido;
     }
-    
-    
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
     
     public List<Hilo> completeHilo(String query) {
         if(hilos == null){
@@ -82,5 +93,10 @@ public class TejidoBean {
             //}
         }
         return hilosFiltrados;
+    }
+    
+    public void handleFileUpload(FileUploadEvent event) {
+        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }

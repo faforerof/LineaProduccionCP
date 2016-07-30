@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -37,6 +38,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tejido.findByValor", query = "SELECT t FROM Tejido t WHERE t.valor = :valor"),
     @NamedQuery(name = "Tejido.findByColor", query = "SELECT t FROM Tejido t WHERE t.color = :color")})
 public class Tejido implements Serializable {
+
+    @Lob
+    @Column(name = "file")
+    private byte[] file;
+    @Size(max = 45)
+    @Column(name = "extension")
+    private String extension;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -188,6 +196,22 @@ public class Tejido implements Serializable {
     @Override
     public String toString() {
         return "com.calidadypunto.modelo.Tejido[ idtejido=" + idtejido + " ]";
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
     
 }

@@ -8,12 +8,12 @@
             <h3 style="border-bottom: 1px solid #b09f9f; padding-bottom: 5px;font-size: 1.8em;margin-top: -5px" align="center">Hilo</h3>
             <h:form id="hiloForm" enctype="multipart/form-data">
                 <h:panelGrid id="hiloData" columns="4" columnClasses="forty-percent top-alignment, sixty-percent top-alignment,forty-percent top-alignment, sixty-percent top-alignment">
-                    <h:outputText value="Número Factura: " />
-                    <h:inputText value="#{HiloBean.newHilo.factura}" required="true" />
-                    <h:outputText value="Peso(Kg): " />
-                    <h:inputText value="#{HiloBean.newHilo.peso}" required="true" />
-                    <h:outputText value="Valor Total(Pesos): " />
-                    <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" />
+                    <h:outputLabel value="Número Factura: " for="numFacturaHilo"/>
+                    <h:inputText value="#{HiloBean.newHilo.factura}" required="true" id="numFacturaHilo"/>
+                    <h:outputLabel value="Peso(Kg): " for="pesoHilo"/>
+                    <h:inputText value="#{HiloBean.newHilo.peso}" required="true" id="pesoHilo"/>
+                    <h:outputLabel value="Valor Total(Pesos): " for="vlrTotalHilo"/>
+                    <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" id="vlrTotalHilo"/>
                     <h:outputText value="Proveedor: " />
                     <p:autoComplete value="#{HiloBean.newHilo.distribuidor}" completeMethod="#{HiloBean.completeProveedor}"
                                     var="proveedor" itemLabel="#{proveedor.numeroIdProveedor} - #{proveedor.nombreProveedor}" 

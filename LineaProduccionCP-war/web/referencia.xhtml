@@ -7,8 +7,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <h:form>
-            <p:dataTable id="tejidoTable" var="tejido" value="#{TejidoBean.tejidoList}" paginator="true" rows="50"
-                         selection="#{TejidoBean.selectedTejido}" selectionMode="single" rowKey="#{tejido.idtejido}" >
+            <p:dataTable id="userasTable" var="users" value="#{UsersBean.usersList}" paginator="true" rows="50"
+                         selection="#{UsersBean.selectedUser}" selectionMode="single" rowKey="#{users.username}" >
 
                 <p:ajax event="rowSelect" listener="#{UsersBean.onRowSelect}"/>
 
@@ -16,26 +16,29 @@
                     Tejido - Teñido
                 </f:facet>
                 <p:column headerText="Número Factura">
-                    #{tejido.factura}
+                    #{users.nombres}
                 </p:column>
                 <p:column headerText="Lote">
-                    #{tejido.lote}
+                    #{users.nombres}
                 </p:column>
                 <p:column headerText="Programa">
-                    #{tejido.programa}
+                    #{users.apellidos}
                 </p:column>
                 <p:column headerText="Cantidad(Kg)">
-                    #{tejido.cantidad}
+                    #{users.username}
                 </p:column>
                 <p:column headerText="Valor(Pesos)">
-                    #{tejido.valor}
+                    #{users.username}
                 </p:column>
                 <p:column headerText="Color">
-                    #{tejido.color}
+                    #{users.username}
                 </p:column>
                 <p:column headerText="Referencia">
-                    #{tejido.referencia}
+                    #{users.username}
                 </p:column>
+                <f:facet name="footer">
+                    <p:commandButton value="View"/>
+                </f:facet>
             </p:dataTable>
         </h:form>
     </h:body>

@@ -25,6 +25,8 @@ public class HomeBean {
                 + "PF('RegistrarTejido').close();"
                 + "PF('AdministrarTejido').close();"
                 + "PF('RegistrarProveedor').close();"
+                + "PF('RegistrarReferencia').close();"
+                + "PF('AdministrarReferencia').close();"
                 + "PF('AdministrarProveedor').close();");
         context.execute("PF('"+idComponente+"').show();");
     }
