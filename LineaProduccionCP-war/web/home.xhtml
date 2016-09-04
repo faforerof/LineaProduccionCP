@@ -16,6 +16,7 @@
                 <h:form>
                     <p:panelMenu style="width:100%">
                         <p:submenu label="Hilo" expanded="true">
+                            <p:menuitem value="Orden de Hilo" action="#{HomeBean.hideAllDialogs('OrdenHilo')}" icon="ui-icon-disk" />
                             <p:menuitem value="Registrar" action="#{HomeBean.hideAllDialogs('RegistrarHilo')}" icon="ui-icon-disk" />
                             <p:menuitem value="Administrar" action="#{HomeBean.hideAllDialogs('AdministrarHilos')}"  icon="ui-icon-contact" />
                         </p:submenu>
@@ -23,6 +24,10 @@
                             <p:menuitem value="Orden de Tejido" action="#{HomeBean.hideAllDialogs('RegistrarTejido')}" icon="ui-icon-note" />
                             <p:menuitem value="Registrar" action="#{HomeBean.hideAllDialogs('RegistrarTejido')}" icon="ui-icon-disk" />
                             <p:menuitem value="Administrar" action="#{HomeBean.hideAllDialogs('AdministrarTejido')}"  icon="ui-icon-contact" />
+                        </p:submenu>
+                        <p:submenu label="Orden de Operacion" expanded="true">
+                            <p:menuitem value="Registrar" action="#{HomeBean.hideAllDialogs('RegistrarHilo')}" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar" action="#{HomeBean.hideAllDialogs('AdministrarHilos')}"  icon="ui-icon-contact" />
                         </p:submenu>
                         <p:submenu label="Proveedores" expanded="true">
                             <p:menuitem value="Registrar" action="#{HomeBean.hideAllDialogs('RegistrarProveedor')}" icon="ui-icon-disk" />
@@ -40,6 +45,11 @@
                 </h:form>
             </p:layoutUnit>
             <p:layoutUnit position="center" resizable="false">
+                <p:panel id="pnlHiloo" style="width: 80%" widgetVar="OrdenHilo" closable="true" toggleable="true" visible="false">
+                    <ui:insert name="header" >
+                        <ui:include src="hiloo.xhtml" />
+                    </ui:insert>
+                </p:panel>
                 <p:panel id="pnl1" style="width: 80%" widgetVar="RegistrarHilo" closable="true" toggleable="true" visible="false">
                     <ui:insert name="header" >
                         <ui:include src="hiloc.xhtml" />

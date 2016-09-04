@@ -16,7 +16,7 @@
                     <h:inputText value="#{HiloBean.newHilo.valorTotal}" required="true" id="vlrTotalHilo"/>
                     <h:outputText value="Proveedor: " />
                     <p:autoComplete value="#{HiloBean.newHilo.distribuidor}" completeMethod="#{HiloBean.completeProveedor}"
-                                    var="proveedor" itemLabel="#{proveedor.numeroIdProveedor} - #{proveedor.nombreProveedor}" 
+                                    var="proveedor" itemLabel="#{proveedor.numeroIdProveedor} - #{proveedor.nombreProveedor}"
                                     converter="#{proveedorConverter}" itemValue="#{proveedor}" forceSelection="true" />
                     <h:outputText value="Referencia: " />
                     <p:autoComplete value="#{HiloBean.newHilo.referencia}" completeMethod="#{HiloBean.completeReferencia}"

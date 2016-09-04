@@ -8,32 +8,24 @@ and open the template in the editor.
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <div class="panelRegistro">
-            <h3 style="border-bottom: 1px solid #b09f9f; padding-bottom: 5px;font-size: 1.8em;margin-top: -5px" align="center">Tejido</h3>
+            <h3 style="border-bottom: 1px solid #b09f9f; padding-bottom: 5px;font-size: 1.8em;margin-top: -5px" align="center">Referencia</h3>
             <h:form id="referenciaForm" enctype="multipart/form-data">
                 <h:panelGrid id="hiloData" columns="4" columnClasses="forty-percent top-alignment, sixty-percent top-alignment,forty-percent top-alignment, sixty-percent top-alignment">
-                    <h:outputText value="Número Factura: " />
-                    <h:inputText value="#{TejidoBean.newTejido.factura}" required="true" />
-                    <h:outputText value="Lote: " />
-                    <h:inputText value="#{TejidoBean.newTejido.lote}" required="true" />
-                    <h:outputText value="Programa: " />
-                    <h:inputText value="#{TejidoBean.newTejido.programa}" required="true" />
-                    <h:outputText value="Cantidad(Kg): " />
-                    <h:inputText value="#{TejidoBean.newTejido.cantidad}" required="true" />
-                    <h:outputText value="Valor(Pesos): " />
-                    <h:inputText value="#{TejidoBean.newTejido.valor}" required="true" />
-                    <h:outputText value="Color: " />
-                    <h:inputText value="#{TejidoBean.newTejido.color}" required="true" />
-                    <h:outputText value="Hilo: " />
-                    <p:autoComplete value="#{TejidoBean.newTejido.hilo}" completeMethod="#{TejidoBean.completeHilo}"
-                                    var="hilo" itemLabel="#{hilo.factura} - #{hilo.peso} - #{hilo.pesoUsado} - #{hilo.referencia.descripcion}"
-                                    converter="#{hiloConverter}" itemValue="#{hilo}" forceSelection="true" />
-                    <h:outputText value="Documento: " />
-                    <p:fileUpload value="#{TejidoBean.file}" mode="simple" skinSimple="true" fileUploadListener="#{TejidoBean.handleFileUpload}"/>
+                    <h:outputLabel value="Nombre: " for="nombreId"/>
+                    <p:inputText id="nombreId" label="nombre" value="#{ReferenciaBean.newReferencia.nombreReferencia}" required="true" />
+                    <h:outputLabel value="Descripción: " for="descripcionId" />
+                    <p:inputText id="descripcionId" label="descripción" value="#{ReferenciaBean.newReferencia.descripcion}" required="true" />
+                    <h:outputText value="Para: " />
+                    <p:selectOneMenu id="idTabla" value="#{ReferenciaBean.newReferencia.tabla}" style="width:150px">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{ReferenciaBean.tablas}" />
+                    </p:selectOneMenu>
                 </h:panelGrid>
-                <p:commandButton value="Crear" action="#{UsersBean.changePassword()}" ajax="false"/>
+                <p:commandButton value="Crear" action="#{ReferenciaBean.createReferencia()}" ajax="false"/>
             </h:form>
         </div>
     </h:body>

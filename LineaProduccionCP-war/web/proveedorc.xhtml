@@ -5,21 +5,35 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
-        <h:outputText value="Proveedor" />
-        <h:form id="proveedorForm">
-            <h:panelGrid id="proveedorData" columns="2">
-                <p:outputLabel for="advanced" value="Tipo de Identificación: "/>
-                <h:selectOneMenu id="advanced" value="#{ProveedorBean.newProveedor.tipoIdProveedor}" converter="#{tipoIdentificacionConverter}">
-                    <f:selectItems value="#{ProveedorBean.identificaciones}" var="tipoIdentificacion" 
-                                   itemLabel="#{tipoIdentificacion.descripcion}" itemValue="#{tipoIdentificacion}" />
-                </h:selectOneMenu>
-                <h:outputText value="Número de Identificación: " />
-                <h:inputText value="#{ProveedorBean.newProveedor.numeroIdProveedor}" required="true" />
-                <h:outputText value="Nombre Proveedor: " />
-                <h:inputText value="#{ProveedorBean.newProveedor.nombreProveedor}" required="true" />
-            </h:panelGrid>
-            <p:commandButton value="Crear" action="#{ProveedorBean.createProveedor()}" ajax="false"/>
-        </h:form>
+        <div class="panelRegistro">
+            <h3 style="border-bottom: 1px solid #b09f9f; padding-bottom: 5px;font-size: 1.8em;margin-top: -5px" align="center">Proveedor</h3>
+            <h:form id="proveedorForm">
+                <h:panelGrid id="proveedorData" columns="4" columnClasses="forty-percent top-alignment, sixty-percent top-alignment,forty-percent top-alignment, sixty-percent top-alignment">
+                    <p:outputLabel for="tipoIdentificacion" value="Tipo de Identificación: "/>
+                    <p:selectOneMenu id="tipoIdentificacion" value="#{ProveedorBean.newProveedor.tipoIdProveedor}" converter="#{tipoIdentificacionConverter}">
+                        <f:selectItems value="#{ProveedorBean.identificaciones}" var="tipoIdentificacion" 
+                                       itemLabel="#{tipoIdentificacion.descripcion}" itemValue="#{tipoIdentificacion}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Número de Identificación: " for="numeroIdentificacion"/>
+                    <p:inputText value="#{ProveedorBean.newProveedor.numeroIdProveedor}" required="true" id="numeroIdentificacion"/>
+                    <p:outputLabel value="Nombre Proveedor: " for="nombreProveedor"/>
+                    <p:inputText value="#{ProveedorBean.newProveedor.nombreProveedor}" required="true" id="nombreProveedor"/>
+                    <p:outputLabel value="Dirección: " for="direccion"/>
+                    <p:inputText value="#{ProveedorBean.newProveedor.direccion}" required="true" id="direccion"/>
+                    <p:outputLabel value="Teléfono: " for="telefono"/>
+                    <p:inputText value="#{ProveedorBean.newProveedor.telefono}" required="true" id="telefono"/>
+                    <p:outputLabel value="Ciudad: " for="ciudad"/>
+                    <p:inputText value="#{ProveedorBean.newProveedor.ciudad}" required="true" id="ciudad"/>
+                    <p:outputLabel value="¿Es auto-retenedor?: " for="autoretenedor"/>
+                    <p:selectOneMenu id="autoretenedor" value="#{ProveedorBean.newProveedor.autoretenedor}">
+                        <f:selectItem itemLabel="- Seleccionar -" itemValue="" />
+                        <f:selectItem itemLabel="Si" itemValue="S" />
+                        <f:selectItem itemLabel="No" itemValue="N" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <p:commandButton value="Crear" action="#{ProveedorBean.createProveedor()}" ajax="false"/>
+            </h:form>
+        </div>
     </h:body>
 </html>
 

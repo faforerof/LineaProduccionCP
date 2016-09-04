@@ -10,38 +10,40 @@
             <ui:include src="header.xhtml" />
         </ui:insert>
     </h:head>
-    <h:body >  
+    <h:body class="body-container">  
         #{UsersBean.hasRights()}
         <p:messages id="administrarMessage" showDetail="false" closable="true"/> 
-        <h:panelGroup id="formUseras">
-            <p:dataTable id="userasTable" var="users" value="#{UsersBean.usersList}" paginator="true" rows="50"
-                         selection="#{UsersBean.selectedUser}" selectionMode="single" rowKey="#{users.username}" >
+        <div class="cuerpo-admin">
+            <h:panelGroup id="formUseras">
+                <p:dataTable id="userasTable" var="users" value="#{UsersBean.usersList}" paginator="true" rows="50"
+                             selection="#{UsersBean.selectedUser}" selectionMode="single" rowKey="#{users.username}" >
 
-                <p:ajax event="rowSelect" listener="#{UsersBean.onRowSelect}"/>
+                    <p:ajax event="rowSelect" listener="#{UsersBean.onRowSelect}"/>
 
-                <f:facet id="titulo" name="header">
-                    <h:form id="buttons">
-                        <p:commandButton style="float: left" value="Crear"  onclick="PF('createDialog').show();"/>
-                        <p:commandButton style="float: left" value="Editar" onclick="PF('modifyDialog').show();" />
-                        <p:commandButton style="float: right" value="Eliminar" onclick="PF('deleteDialog').show();"/>
-                    </h:form> 
-                    Usuarios
-                </f:facet>
+                    <f:facet id="titulo" name="header">
+                        <h:form id="buttons">
+                            <p:commandButton style="float: left" value="Crear"  onclick="PF('createDialog').show();"/>
+                            <p:commandButton style="float: left" value="Editar" onclick="PF('modifyDialog').show();" />
+                            <p:commandButton style="float: right" value="Eliminar" onclick="PF('deleteDialog').show();"/>
+                        </h:form> 
+                        Usuarios
+                    </f:facet>
 
-                <p:column headerText="Nombre">
-                    #{users.nombres}
-                </p:column>
+                    <p:column headerText="Nombre">
+                        #{users.nombres}
+                    </p:column>
 
-                <p:column headerText="Apellido">
-                    #{users.apellidos}
-                </p:column>
+                    <p:column headerText="Apellido">
+                        #{users.apellidos}
+                    </p:column>
 
-                <p:column headerText="Ususuario">
-                    #{users.username}
-                </p:column>
+                    <p:column headerText="Ususuario">
+                        #{users.username}
+                    </p:column>
 
-            </p:dataTable>
-        </h:panelGroup>
+                </p:dataTable>
+            </h:panelGroup>
+        </div>
         <p:dialog id="errorDlg" header="Error" widgetVar="errorDialog" modal="true"
                   showEffect="explode" hideEffect="explode" >
             <h:form>

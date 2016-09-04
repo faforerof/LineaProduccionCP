@@ -10,7 +10,9 @@ import com.calidadypunto.modelo.Referencia;
 import com.calidadypunto.modelo.TipoIdentificacion;
 import com.calidadypunto.session.ReferenciaFacade;
 import com.calidadypunto.session.TipoIdentificacionFacade;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -32,13 +34,17 @@ public class ReferenciaBean {
     private TipoIdentificacionFacade tipoIdentificacionFacade;
     private List<TipoIdentificacion> identificaciones;
     private List<Referencia> referenciaList;
-    private Proveedor selectedProveedor;
-    private Proveedor newProveedor;
-    private Proveedor modifyProveedor;
+    private Referencia selectedReferencia;
+    private Referencia newReferencia;
+    private Referencia modifyReferencia;
+    private Map<String,String> tablas;
     
     public ReferenciaBean(){
-        newProveedor = new Proveedor();
-        modifyProveedor = new Proveedor();
+        newReferencia = new Referencia();
+        modifyReferencia = new Referencia();
+        tablas  = new HashMap<>();
+        tablas.put("Hilo", "Hilo");
+        tablas.put("Tejido", "Tejido");
     }
 
     public List<Referencia> getReferenciaList() {
@@ -52,28 +58,36 @@ public class ReferenciaBean {
         this.referenciaList = referenciaList;
     }
 
-    public Proveedor getSelectedProveedor() {
-        return selectedProveedor;
+    public Referencia getSelectedReferencia() {
+        return selectedReferencia;
     }
 
-    public void setSelectedProveedor(Proveedor selectedProveedor) {
-        this.selectedProveedor = selectedProveedor;
+    public void setSelectedReferencia(Referencia selectedProveedor) {
+        this.selectedReferencia = selectedProveedor;
     }
     
-    public Proveedor getNewProveedor() {
-        return newProveedor;
+    public Referencia getNewReferencia() {
+        return newReferencia;
     }
 
-    public void setNewProveedor(Proveedor newProveedor) {
-        this.newProveedor = newProveedor;
+    public void setNewProveedor(Referencia newReferencia) {
+        this.newReferencia = newReferencia;
     }
 
-    public Proveedor getModifyProveedor() {
-        return modifyProveedor;
+    public Referencia getModifyProveedor() {
+        return modifyReferencia;
     }
 
-    public void setModifyProveedor(Proveedor modifyProveedor) {
-        this.modifyProveedor = modifyProveedor;
+    public void setModifyProveedor(Referencia modifyReferencia) {
+        this.modifyReferencia = modifyReferencia;
+    }
+
+    public Map<String, String> getTablas() {
+        return tablas;
+    }
+
+    public void setTablas(Map<String, String> tablas) {
+        this.tablas = tablas;
     }
     
     public List<TipoIdentificacion> getIdentificaciones() {
@@ -88,41 +102,18 @@ public class ReferenciaBean {
     }
     
     public void onRowSelect(SelectEvent event){
-        selectedProveedor = proveedorFacade.find(((Proveedor) event.getObject()).getIdproveedor());
-        modifyProveedor = selectedProveedor;
+        selectedReferencia = referenciaFacade.find(((Referencia) event.getObject()).getIdreferencia());
+        modifyReferencia = selectedReferencia;
     }
     
-    public String createProveedor(){
+    public String createReferencia(){
         try{
-            proveedorFacade.create(newProveedor);
+            referenciaFacade.create(newReferencia);
         } catch (Exception ex) {
             addMessage("¡Error!", "No se puede crear el proveedor.", FacesMessage.SEVERITY_ERROR);
             return "";
         }
         return "home.xhtml?faces-redirect=true";
-    }
-    
-    public String editProveedor(){
-        try{
-            selectedProveedor.setNombreProveedor(modifyProveedor.getNombreProveedor());
-            selectedProveedor.setNumeroIdProveedor(modifyProveedor.getNumeroIdProveedor());
-            selectedProveedor.setTipoIdProveedor(modifyProveedor.getTipoIdProveedor());
-            proveedorFacade.edit(selectedProveedor);
-        } catch (Exception ex) {
-            addMessage("¡Error!", "No se puede crear el proveedor.", FacesMessage.SEVERITY_ERROR);
-            return "";
-        }
-        return "home.xhtml?faces-redirect=true";
-    }
-    
-    public String deleteProveedor(){
-        try {
-            proveedorFacade.remove(selectedProveedor);
-            return "home.xhtml?faces-redirect=true";
-        } catch (Exception e) {
-            addMessage("¡Error!", "Error con la conexión a base de datos.", FacesMessage.SEVERITY_FATAL);
-            return "";
-        }
     }
     
     public void addMessage(String summary, String detail, Severity severity) {

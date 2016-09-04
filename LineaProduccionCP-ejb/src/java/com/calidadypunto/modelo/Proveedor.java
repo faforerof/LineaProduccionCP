@@ -39,6 +39,26 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Proveedor.findByNumeroIdProveedor", query = "SELECT p FROM Proveedor p WHERE p.numeroIdProveedor = :numeroIdProveedor")})
 public class Proveedor implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedor")
+    private Collection<OrdenHilo> ordenHiloCollection;
+
+    @Size(max = 230)
+    @Column(name = "display_name")
+    private String displayName;
+
+    @Size(max = 200)
+    @Column(name = "direccion")
+    private String direccion;
+    @Size(max = 20)
+    @Column(name = "telefono")
+    private String telefono;
+    @Size(max = 100)
+    @Column(name = "ciudad")
+    private String ciudad;
+    @Size(max = 2)
+    @Column(name = "autoretenedor")
+    private String autoretenedor;
+
     @OneToMany(mappedBy = "proveedor")
     private Collection<Tejido> tejidoCollection;
 
@@ -147,6 +167,55 @@ public class Proveedor implements Serializable {
 
     public void setTejidoCollection(Collection<Tejido> tejidoCollection) {
         this.tejidoCollection = tejidoCollection;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getAutoretenedor() {
+        return autoretenedor;
+    }
+
+    public void setAutoretenedor(String autoretenedor) {
+        this.autoretenedor = autoretenedor;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    @XmlTransient
+    public Collection<OrdenHilo> getOrdenHiloCollection() {
+        return ordenHiloCollection;
+    }
+
+    public void setOrdenHiloCollection(Collection<OrdenHilo> ordenHiloCollection) {
+        this.ordenHiloCollection = ordenHiloCollection;
     }
     
 }

@@ -56,6 +56,7 @@ public class LoginBean implements Serializable{
         if(useras != null){
             if(useras.getPassword().equals(c.cryptWithMD5(password))){
                 HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+                session.setAttribute("username", useras.getUsername());
                 session.setAttribute("nombre", useras.getNombres());
                 session.setAttribute("apellido", useras.getApellidos());
                 session.setAttribute("id", useras.getIdusers());

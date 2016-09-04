@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <div class="panelRegistro">
+            <h3 style="border-bottom: 1px solid #b09f9f; padding-bottom: 5px;font-size: 1.8em;margin-top: -5px" align="center">Orden de Compra - Hilo</h3>
+            <h:form id="hilooForm" enctype="multipart/form-data">
+                <h:panelGrid id="hilooData" columns="4" columnClasses="forty-percent top-alignment, sixty-percent top-alignment,forty-percent top-alignment, sixty-percent top-alignment">
+                    <p:outputLabel value="Proveedor: " for="proveedorHiloo"/>
+                    <p:autoComplete id="proveedorHiloo" value="#{HiloOrdenBean.newOrdenHilo.proveedor}" completeMethod="#{HiloOrdenBean.completeProveedor}"
+                                    var="proveedor" itemLabel="#{proveedor.displayName}"
+                                    converter="#{proveedorConverter}" itemValue="#{proveedor}" forceSelection="true" required="true"/>
+                    <p:outputLabel value="Condiciones Pago: " for="condicionesHilo"/>
+                    <p:selectOneMenu id="condicionesHilo" value="#{HiloOrdenBean.newOrdenHilo.condicionPago}" required="true">
+                        <f:selectItem itemLabel="- Seleccionar -" itemValue="" />
+                        <f:selectItem itemLabel="Contado" itemValue="CO" />
+                        <f:selectItem itemLabel="30 Días" itemValue="30" />
+                        <f:selectItem itemLabel="60 Días" itemValue="60" />
+                        <f:selectItem itemLabel="90 Días" itemValue="90" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <br></br>
+                <br></br>
+                <p:dataTable id="registrosHiloOTable" var="registro" value="#{HiloOrdenBean.registros}" editable="true" editMode="cell" widgetVar="cellRegistro">
+                    <f:facet name="header">
+                        Registros
+                    </f:facet>
+
+                    <p:column headerText="Referencia">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Peso (Kg)">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{car.year}" style="width:96%" label="Year"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Valor (Pesos/Kg)">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu value="#{car.brand}" style="width:100%">
+                                    <f:selectItems value="#{dtEditView.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Valor Total">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu value="#{car.color}" style="width:100%">
+                                    <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                </p:dataTable>
+
+                <br></br>
+                <br></br>
+                <p:commandButton value="Generar Orden" action="#{HiloOrdenBean.createHilo(request)}" ajax="false"/>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

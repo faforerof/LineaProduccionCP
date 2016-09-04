@@ -21,6 +21,7 @@ public class HomeBean {
     public void hideAllDialogs(String idComponente){
         RequestContext context = RequestContext.getCurrentInstance();
         context.execute("PF('RegistrarHilo').close();"
+                + "PF('OrdenHilo').close();"
                 + "PF('AdministrarHilos').close();"
                 + "PF('RegistrarTejido').close();"
                 + "PF('AdministrarTejido').close();"

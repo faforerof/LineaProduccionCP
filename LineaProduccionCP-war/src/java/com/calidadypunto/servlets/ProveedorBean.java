@@ -7,10 +7,8 @@ package com.calidadypunto.servlets;
 
 import com.calidadypunto.modelo.Proveedor;
 import com.calidadypunto.modelo.TipoIdentificacion;
-import com.calidadypunto.modelo.Users;
 import com.calidadypunto.session.ProveedorFacade;
 import com.calidadypunto.session.TipoIdentificacionFacade;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
@@ -96,6 +94,7 @@ public class ProveedorBean {
     
     public String createProveedor(){
         try{
+            newProveedor.setDisplayName(newProveedor.getNumeroIdProveedor() + " - " + newProveedor.getNombreProveedor());
             proveedorFacade.create(newProveedor);
         } catch (Exception ex) {
             addMessage("¡Error!", "No se puede crear el proveedor.", FacesMessage.SEVERITY_ERROR);
@@ -109,6 +108,11 @@ public class ProveedorBean {
             selectedProveedor.setNombreProveedor(modifyProveedor.getNombreProveedor());
             selectedProveedor.setNumeroIdProveedor(modifyProveedor.getNumeroIdProveedor());
             selectedProveedor.setTipoIdProveedor(modifyProveedor.getTipoIdProveedor());
+            selectedProveedor.setDireccion(modifyProveedor.getDireccion());
+            selectedProveedor.setCiudad(modifyProveedor.getCiudad());
+            selectedProveedor.setTelefono(modifyProveedor.getTelefono());
+            selectedProveedor.setAutoretenedor(modifyProveedor.getAutoretenedor());
+            selectedProveedor.setDisplayName(modifyProveedor.getDisplayName());
             proveedorFacade.edit(selectedProveedor);
         } catch (Exception ex) {
             addMessage("¡Error!", "No se puede crear el proveedor.", FacesMessage.SEVERITY_ERROR);

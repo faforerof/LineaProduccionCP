@@ -14,12 +14,94 @@ and open the template in the editor.
     background-size: 100%;
 }
 
-.ui-widget-content {
+.body-container {
+    background-image:url('images/fondo.jpg');
+    background-size: 100%;
+    background-color: rgba(255,255,255,0.8)!important;
+}
+
+.ui-datatable  {
+    background-color: rgba(255,255,255, 1)!important;
+}
+
+.ui-state-highlight{
+    border: 1px solid #fcd3a1!important;
+    background-color: rgba(255,255,255,0.8)!important;
+    color: #444444!important;
+}
+
+.ui-layout-unit.ui-widget-content {
+    background: 0!important;
+    border: 0!important;
+    background-color: rgba(255,255,255,0.8)!important;
+}
+.ui-layout-unit-content.ui-widget-content {
+    background: 0!important;
+    border: 0!important;
+}
+
+.ui-widget-content .ui-panelgrid-even {
+    background: 0!important;
+    border: 0!important;
+}
+
+.ui-menu.ui-menubar.ui-widget.ui-widget-content{
+    border: 1px solid #fcd3a1!important;
+    background-color: rgba(255,255,255,0.1)!important;
+    color: #444444!important;
+    background: 0!important;
+    border: 0!important;
+}
+
+.ui-panelmenu-content.ui-widget-content {
+    background: 0!important;
+    border: 0!important;
+}
+
+.ui-panel.ui-widget.ui-widget-content {
+    background: 0!important;
+    border: 0!important;
+}
+
+.ui-datatable-data.ui-widget-content {
+    background: 0!important;
+    background-color: rgba(255,255,255,0.8)!important;
+    border: 0!important;
+}
+
+.ui-widget-content.ui-datatable-even.ui-datatable-selectable {
+    background-color: rgba(255,255,255,0.8)!important;
+    border: 0!important;
+}
+.ui-widget-content.ui-datatable-odd.ui-datatable-selectable {
+    background-color: rgba(255,255,255,0.8)!important;
+    border: 0!important;
+}
+
+.ui-panel-content.ui-widget-content {
     background: 0!important;
     border: 0!important;
 }
 
 .ui-layout-pane-north {
+    background: 0;
+    background-color: rgba(255,255,255,0.8)!important;
+    overflow:hidden!important;
+}
+
+.ui-layout-north  {
+    background: 0;
+    background-color: rgba(255,255,255,0.8)!important;
+    overflow:hidden!important;
+}
+
+.ui-dialog-content {
+    background: 0;
+    background-color: rgba(255,255,255,1)!important;
+    overflow:hidden!important;
+}
+
+.cuerpo-admin  {
     background: 0;
     background-color: rgba(255,255,255,0.8)!important;
     overflow:hidden!important;
@@ -75,4 +157,12 @@ and open the template in the editor.
 
 .top-alignment {
      vertical-align: top;
+}
+
+.ui-selectonemenu-list {
+    background-color: #ffffff!important;
+}
+
+.ui-autocomplete-panel {
+    background-color: #ffffff!important;
 }
