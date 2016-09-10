@@ -7,6 +7,7 @@ package com.calidadypunto.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -41,8 +43,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrdenHilo.findByUsuario", query = "SELECT o FROM OrdenHilo o WHERE o.usuario = :usuario")})
 public class OrdenHilo implements Serializable {
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ordenHilo")
-    private OrdenHiloRegistro ordenHiloRegistro;
 
     @JoinColumn(name = "estado", referencedColumnName = "idestado")
     @ManyToOne
@@ -66,7 +66,9 @@ public class OrdenHilo implements Serializable {
     private String usuario;
     @JoinColumn(name = "proveedor", referencedColumnName = "idproveedor")
     @ManyToOne(optional = false)
-    private Proveedor proveedor;
+    private Proveedor proveedor;    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orden")
+    private List<OrdenHiloRegistro> ordenHiloRegistro;
 
     public OrdenHilo() {
     }
@@ -153,11 +155,11 @@ public class OrdenHilo implements Serializable {
         this.estado = estado;
     }
 
-    public OrdenHiloRegistro getOrdenHiloRegistro() {
+    public List<OrdenHiloRegistro> getOrdenHiloRegistro() {
         return ordenHiloRegistro;
     }
 
-    public void setOrdenHiloRegistro(OrdenHiloRegistro ordenHiloRegistro) {
+    public void setOrdenHiloRegistro(List<OrdenHiloRegistro> ordenHiloRegistro) {
         this.ordenHiloRegistro = ordenHiloRegistro;
     }
     

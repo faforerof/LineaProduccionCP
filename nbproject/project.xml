@@ -5,6 +5,7 @@
         <data xmlns="http://www.netbeans.org/ns/j2ee-earproject/2">
             <name>LineaProduccionCP</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
+            <explicit-platform/>
             <web-module-libraries/>
             <web-module-additional-libraries>
                 <library>

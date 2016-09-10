@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author lenovo
+ * @author Freddy
  */
 @Stateless
 public class HiloFacade extends AbstractFacade<Hilo> {

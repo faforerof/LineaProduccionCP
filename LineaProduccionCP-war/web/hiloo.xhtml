@@ -27,41 +27,46 @@
                 <p:dataTable id="registrosHiloOTable" var="registro" value="#{HiloOrdenBean.registros}" editable="true" editMode="cell" widgetVar="cellRegistro">
                     <f:facet name="header">
                         Registros
+                        <p:commandButton value="Add" actionListener="#{HiloOrdenBean.addAction}" update="registrosHiloOTable" ajax="true"/>
                     </f:facet>
 
                     <p:column headerText="Referencia">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}" style="width:96%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Peso (Kg)">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{car.year}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Valor (Pesos/Kg)">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
-                            <f:facet name="input">
-                                <h:selectOneMenu value="#{car.brand}" style="width:100%">
-                                    <f:selectItems value="#{dtEditView.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                            <f:facet name="output"><h:outputText value="#{registro.referencia}" /></f:facet>
+                           <f:facet name="input">
+                                <h:selectOneMenu value="#{registro.referencia}" style="width:100%">
+                                    <f:selectItems value="#{HiloOrdenBean.referencias}" var="color" itemLabel="#{color}" itemValue="#{color}" />
                                 </h:selectOneMenu>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-
-                    <p:column headerText="Valor Total">
+                    
+                    <p:column headerText="Peso(Kg)">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
-                            <f:facet name="input">
-                                <h:selectOneMenu value="#{car.color}" style="width:100%">
-                                    <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
-                                </h:selectOneMenu>
+                            <f:facet name="output"><h:outputText value="#{registro.peso}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="pesoInput" value="#{registro.peso}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="Valor(Pesos/Kg)">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{registro.valor}" >
+                                    <f:convertNumber currencySymbol="$" type="currency"/>
+                                </h:outputText>
                             </f:facet>
+                            <f:facet name="input"><p:inputText id="valorInput" value="#{registro.valor}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="Valor Total(Pesos)">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{registro.valor}" >
+                                    <f:convertNumber currencySymbol="$" type="currency"/>
+                                </h:outputText>
+                            </f:facet>
+                            <f:facet name="input"><p:inputText id="valorTotalInput" value="#{registro.valor}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
                 </p:dataTable>

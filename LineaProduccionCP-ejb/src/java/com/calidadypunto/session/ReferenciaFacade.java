@@ -6,13 +6,15 @@
 package com.calidadypunto.session;
 
 import com.calidadypunto.modelo.Referencia;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
- * @author lenovo
+ * @author Freddy
  */
 @Stateless
 public class ReferenciaFacade extends AbstractFacade<Referencia> {
@@ -29,4 +31,9 @@ public class ReferenciaFacade extends AbstractFacade<Referencia> {
         super(Referencia.class);
     }
     
+    public List<Referencia> findByTabla(String tabla){
+        Query nq = getEntityManager().createNamedQuery("Referencia.findByTabla");
+        nq.setParameter("tabla", tabla);
+        return nq.getResultList();
+    }
 }

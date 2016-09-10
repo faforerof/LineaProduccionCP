@@ -5,7 +5,6 @@
  */
 package com.calidadypunto.servlets;
 
-import com.calidadypunto.modelo.Proveedor;
 import com.calidadypunto.modelo.Referencia;
 import com.calidadypunto.modelo.TipoIdentificacion;
 import com.calidadypunto.session.ReferenciaFacade;
@@ -45,6 +44,7 @@ public class ReferenciaBean {
         tablas  = new HashMap<>();
         tablas.put("Hilo", "Hilo");
         tablas.put("Tejido", "Tejido");
+        tablas.put("Orden Hilo", "Orden Hilo");
     }
 
     public List<Referencia> getReferenciaList() {

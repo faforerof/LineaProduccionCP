@@ -6,22 +6,24 @@
 package com.calidadypunto.modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author lenovo
+ * @author Freddy
  */
 @Entity
 @Table(name = "orden_hilo_registro")
@@ -29,52 +31,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "OrdenHiloRegistro.findAll", query = "SELECT o FROM OrdenHiloRegistro o"),
     @NamedQuery(name = "OrdenHiloRegistro.findByIdordenHiloRegistro", query = "SELECT o FROM OrdenHiloRegistro o WHERE o.idordenHiloRegistro = :idordenHiloRegistro"),
-    @NamedQuery(name = "OrdenHiloRegistro.findByOrden", query = "SELECT o FROM OrdenHiloRegistro o WHERE o.orden = :orden"),
-    @NamedQuery(name = "OrdenHiloRegistro.findByReferencia", query = "SELECT o FROM OrdenHiloRegistro o WHERE o.referencia = :referencia"),
     @NamedQuery(name = "OrdenHiloRegistro.findByPeso", query = "SELECT o FROM OrdenHiloRegistro o WHERE o.peso = :peso"),
+    @NamedQuery(name = "OrdenHiloRegistro.findByReferencia", query = "SELECT o FROM OrdenHiloRegistro o WHERE o.referencia = :referencia"),
     @NamedQuery(name = "OrdenHiloRegistro.findByValor", query = "SELECT o FROM OrdenHiloRegistro o WHERE o.valor = :valor")})
 public class OrdenHiloRegistro implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idorden_hilo_registro")
     private Integer idordenHiloRegistro;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "orden")
-    private int orden;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @Column(name = "peso")
+    private Integer peso;
+    @Size(max = 255)
     @Column(name = "referencia")
     private String referencia;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "peso")
-    private int peso;
-    @Basic(optional = false)
-    @NotNull
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
-    private long valor;
-    @JoinColumn(name = "idorden_hilo_registro", referencedColumnName = "idorden_hilo", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private OrdenHilo ordenHilo;
+    private BigDecimal valor;
+    @JoinColumn(name = "orden", referencedColumnName = "idorden_hilo")
+    @ManyToOne
+    private OrdenHilo orden;
 
     public OrdenHiloRegistro() {
     }
 
     public OrdenHiloRegistro(Integer idordenHiloRegistro) {
         this.idordenHiloRegistro = idordenHiloRegistro;
-    }
-
-    public OrdenHiloRegistro(Integer idordenHiloRegistro, int orden, String referencia, int peso, long valor) {
-        this.idordenHiloRegistro = idordenHiloRegistro;
-        this.orden = orden;
-        this.referencia = referencia;
-        this.peso = peso;
-        this.valor = valor;
     }
 
     public Integer getIdordenHiloRegistro() {
@@ -85,12 +69,12 @@ public class OrdenHiloRegistro implements Serializable {
         this.idordenHiloRegistro = idordenHiloRegistro;
     }
 
-    public int getOrden() {
-        return orden;
+    public Integer getPeso() {
+        return peso;
     }
 
-    public void setOrden(int orden) {
-        this.orden = orden;
+    public void setPeso(Integer peso) {
+        this.peso = peso;
     }
 
     public String getReferencia() {
@@ -101,28 +85,20 @@ public class OrdenHiloRegistro implements Serializable {
         this.referencia = referencia;
     }
 
-    public int getPeso() {
-        return peso;
-    }
-
-    public void setPeso(int peso) {
-        this.peso = peso;
-    }
-
-    public long getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(long valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
-    public OrdenHilo getOrdenHilo() {
-        return ordenHilo;
+    public OrdenHilo getOrden() {
+        return orden;
     }
 
-    public void setOrdenHilo(OrdenHilo ordenHilo) {
-        this.ordenHilo = ordenHilo;
+    public void setOrden(OrdenHilo orden) {
+        this.orden = orden;
     }
 
     @Override

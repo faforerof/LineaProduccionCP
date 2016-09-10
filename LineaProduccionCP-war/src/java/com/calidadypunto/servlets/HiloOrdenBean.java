@@ -6,17 +6,24 @@
 package com.calidadypunto.servlets;
 
 import com.calidadypunto.modelo.OrdenHilo;
+import com.calidadypunto.modelo.OrdenHiloRegistro;
 import com.calidadypunto.modelo.Proveedor;
+import com.calidadypunto.modelo.Referencia;
 import com.calidadypunto.session.EstadoFacade;
 import com.calidadypunto.session.OrdenHiloFacade;
 import com.calidadypunto.session.ProveedorFacade;
+import com.calidadypunto.session.ReferenciaFacade;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +33,7 @@ import javax.servlet.http.HttpSession;
  * @author lenovo
  */
 @ManagedBean(name="HiloOrdenBean")
-@SessionScoped
+@ViewScoped
 public class HiloOrdenBean {
 
     @EJB
@@ -37,11 +44,20 @@ public class HiloOrdenBean {
     
     @EJB
     private EstadoFacade estadoFacade;
+    
+    @EJB
+    private ReferenciaFacade referenciaFacade;
+    
     private OrdenHilo newOrdenHilo;
     private List<Proveedor> proveedores;
+    private List<OrdenHiloRegistro> registros;
+    private Map<String,String> referencias;
     
     public HiloOrdenBean(){
         newOrdenHilo = new OrdenHilo();
+        referencias = new HashMap<>();
+        registros = new ArrayList<>();
+        newOrdenHilo.setOrdenHiloRegistro(registros);
     }
 
     public OrdenHilo getNewOrdenHilo() {
@@ -59,8 +75,39 @@ public class HiloOrdenBean {
     public void setProveedores(List<Proveedor> proveedores) {
         this.proveedores = proveedores;
     }
+
+    public List<OrdenHiloRegistro> getRegistros() {
+        
+        return registros;
+    }
+
+    public void setRegistros(List<OrdenHiloRegistro> registros) {
+        this.registros = registros;
+    }
+
+    public Map<String, String> getReferencias() {
+        if(referencias == null || referencias.isEmpty()){
+            List<Referencia> refs = referenciaFacade.findByTabla("Orden Hilo");
+            for(Referencia r : refs){
+                referencias.put(r.getNombreReferencia(), r.getDescripcion());
+            }
+        }
+        return referencias;
+    }
+
+    public void setReferencias(Map<String, String> referencias) {
+        this.referencias = referencias;
+    }
     
-    
+    public String addAction() {
+        OrdenHiloRegistro order = new OrdenHiloRegistro();
+        order.setReferencia("18/1 Cardado");
+        order.setPeso(0);
+        order.setValor(BigDecimal.ZERO);
+        order.setOrden(newOrdenHilo);
+        registros.add(order);
+        return null;
+    }
     
     public List<Proveedor> completeProveedor(String query) {
         if(proveedores == null){
