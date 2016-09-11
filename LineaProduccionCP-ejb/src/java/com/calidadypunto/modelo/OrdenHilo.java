@@ -6,6 +6,7 @@
 package com.calidadypunto.modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -43,7 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrdenHilo.findByUsuario", query = "SELECT o FROM OrdenHilo o WHERE o.usuario = :usuario")})
 public class OrdenHilo implements Serializable {
 
-
+    
     @JoinColumn(name = "estado", referencedColumnName = "idestado")
     @ManyToOne
     private Estado estado;
@@ -64,6 +65,15 @@ public class OrdenHilo implements Serializable {
     @Size(max = 45)
     @Column(name = "usuario")
     private String usuario;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "valor_bruto")
+    private BigDecimal valorBruto;
+    @Column(name = "iva")
+    private BigDecimal iva;
+    @Column(name = "retencion")
+    private BigDecimal retencion;
+    @Column(name = "total_neto")
+    private BigDecimal totalNeto;
     @JoinColumn(name = "proveedor", referencedColumnName = "idproveedor")
     @ManyToOne(optional = false)
     private Proveedor proveedor;    
@@ -161,6 +171,38 @@ public class OrdenHilo implements Serializable {
 
     public void setOrdenHiloRegistro(List<OrdenHiloRegistro> ordenHiloRegistro) {
         this.ordenHiloRegistro = ordenHiloRegistro;
+    }
+
+    public BigDecimal getValorBruto() {
+        return valorBruto;
+    }
+
+    public void setValorBruto(BigDecimal valorBruto) {
+        this.valorBruto = valorBruto;
+    }
+
+    public BigDecimal getIva() {
+        return iva;
+    }
+
+    public void setIva(BigDecimal iva) {
+        this.iva = iva;
+    }
+
+    public BigDecimal getRetencion() {
+        return retencion;
+    }
+
+    public void setRetencion(BigDecimal retencion) {
+        this.retencion = retencion;
+    }
+
+    public BigDecimal getTotalNeto() {
+        return totalNeto;
+    }
+
+    public void setTotalNeto(BigDecimal totalNeto) {
+        this.totalNeto = totalNeto;
     }
     
 }

@@ -7,7 +7,7 @@
     <h:body>
         <div class="panelRegistro">
             <h3 style="border-bottom: 1px solid #b09f9f; padding-bottom: 5px;font-size: 1.8em;margin-top: -5px" align="center">Orden de Compra - Hilo</h3>
-            <h:form id="hilooForm" enctype="multipart/form-data">
+            <h:form id="hilooForm">
                 <h:panelGrid id="hilooData" columns="4" columnClasses="forty-percent top-alignment, sixty-percent top-alignment,forty-percent top-alignment, sixty-percent top-alignment">
                     <p:outputLabel value="Proveedor: " for="proveedorHiloo"/>
                     <p:autoComplete id="proveedorHiloo" value="#{HiloOrdenBean.newOrdenHilo.proveedor}" completeMethod="#{HiloOrdenBean.completeProveedor}"
@@ -24,12 +24,15 @@
                 </h:panelGrid>
                 <br></br>
                 <br></br>
+                <p:remoteCommand name="onCellEdit" update="hilooForm" />
                 <p:dataTable id="registrosHiloOTable" var="registro" value="#{HiloOrdenBean.registros}" editable="true" editMode="cell" widgetVar="cellRegistro">
                     <f:facet name="header">
                         Registros
-                        <p:commandButton value="Add" actionListener="#{HiloOrdenBean.addAction}" update="registrosHiloOTable" ajax="true"/>
+                        
                     </f:facet>
-
+                    
+                    <p:ajax event="cellEdit" listener="#{HiloOrdenBean.onCellEdit}" oncomplete="onCellEdit()" />
+                    
                     <p:column headerText="Referencia">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{registro.referencia}" /></f:facet>
@@ -44,7 +47,7 @@
                     <p:column headerText="Peso(Kg)">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{registro.peso}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="pesoInput" value="#{registro.peso}" style="width:100%"/></f:facet>
+                            <f:facet name="input"><h:inputText id="pesoInput" value="#{registro.peso}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
                     
@@ -55,27 +58,47 @@
                                     <f:convertNumber currencySymbol="$" type="currency"/>
                                 </h:outputText>
                             </f:facet>
-                            <f:facet name="input"><p:inputText id="valorInput" value="#{registro.valor}" style="width:100%"/></f:facet>
+                            <f:facet name="input"><h:inputText id="valorInput" value="#{registro.valor}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
                     
                     <p:column headerText="Valor Total(Pesos)">
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{registro.valor}" >
-                                    <f:convertNumber currencySymbol="$" type="currency"/>
-                                </h:outputText>
-                            </f:facet>
-                            <f:facet name="input"><p:inputText id="valorTotalInput" value="#{registro.valor}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
+                        <h:outputText value="#{registro.valorTotal}" id="valorTotalOutput">
+                            <f:convertNumber currencySymbol="$" type="currency"/>
+                        </h:outputText>
                     </p:column>
+                    
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton  icon="ui-icon-closethick" title="View" actionListener="#{HiloOrdenBean.removeHiloRegistro(registro)}" oncomplete="onCellEdit()" ajax="true">
+                        </p:commandButton>
+                    </p:column>
+                    
+                    <f:facet name="footer">
+                        <p:commandButton value="Agregar" actionListener="#{HiloOrdenBean.addHiloRegistro}" update="registrosHiloOTable" icon="ui-icon-plus" ajax="true"/>
+                    </f:facet>
                 </p:dataTable>
-
                 <br></br>
+                <h:panelGrid id="hilooDataTotales" columns="4" columnClasses="forty-percent top-alignment, sixty-percent top-alignment,forty-percent top-alignment, sixty-percent top-alignment">
+                    <p:outputLabel value="Valor Bruto: " for="valorBrutoHiloO"/>
+                    <p:inputText value="#{HiloOrdenBean.newOrdenHilo.valorBruto}" id="valorBrutoHiloO" disabled="true">
+                        <f:convertNumber currencySymbol="$" type="currency"/>
+                    </p:inputText>
+                    <p:outputLabel value="IVA: " for="ivaHiloO"/>
+                    <p:inputText value="#{HiloOrdenBean.newOrdenHilo.iva}" id="ivaHiloO" disabled="true">
+                        <f:convertNumber currencySymbol="$" type="currency"/>
+                    </p:inputText>
+                    <p:outputLabel value="Retención: " for="retencionHiloO"/>
+                    <p:inputText value="#{HiloOrdenBean.newOrdenHilo.retencion}" id="retencionHiloO" disabled="true">
+                        <f:convertNumber currencySymbol="$" type="currency"/>
+                    </p:inputText>
+                    <p:outputLabel value="Total Neto: " for="totalNetoHiloO"/>
+                    <p:inputText value="#{HiloOrdenBean.newOrdenHilo.totalNeto}" id="totalNetoHiloO" disabled="true">
+                        <f:convertNumber currencySymbol="$" type="currency"/>
+                    </p:inputText>
+                </h:panelGrid>
                 <br></br>
-                <p:commandButton value="Generar Orden" action="#{HiloOrdenBean.createHilo(request)}" ajax="false"/>
+                <p:commandButton value="Generar Orden" action="#{HiloOrdenBean.createOrdenHilo(request)}" ajax="false"/>
             </h:form>
         </div>
     </h:body>
 </html>
-

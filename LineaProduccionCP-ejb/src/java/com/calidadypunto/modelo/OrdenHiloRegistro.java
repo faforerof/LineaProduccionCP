@@ -50,6 +50,8 @@ public class OrdenHiloRegistro implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
     private BigDecimal valor;
+    @Column(name = "valor_total")
+    private BigDecimal valorTotal;
     @JoinColumn(name = "orden", referencedColumnName = "idorden_hilo")
     @ManyToOne
     private OrdenHilo orden;
@@ -101,6 +103,14 @@ public class OrdenHiloRegistro implements Serializable {
         this.orden = orden;
     }
 
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
